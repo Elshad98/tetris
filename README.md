@@ -1,7 +1,7 @@
 # Tetris
   
 The main purpose of this application is to learn JavaScript.     
-Check the demo: [https://elshad98.github.io/breakout-game](https://elshad98.github.io/breakout-game)    
+Check the demo:     
 
 ## Instructions
 
