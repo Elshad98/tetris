@@ -11,7 +11,7 @@ $ git clone https://github.com/elshad98/tetris.git
 ```  
 Then go to the folder
 ```
-$ cd calculator
+$ cd tetris
 ```
 Install dependencies. Make sure you already have nodejs & npm installed in your system.  
 ```
