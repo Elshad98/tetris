@@ -1,4 +1,39 @@
 body {
     font-family: 'Press Start 2P', cursive;
-    display: flex;
+    background-color: #3E4147;
+}
+
+#root {
+    width: 100%;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+#root canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+.red {
+    color: #F04747;
+}
+
+.orange {
+    color: #F26522;
+}
+
+.yellow {
+    color: #FAA61B;
+}
+
+.green {
+    color: #43B581;
+}
+
+.blue {
+    color: #4285F4;
+}
+
+.purple {
+    color: #BD33A4;
 }
