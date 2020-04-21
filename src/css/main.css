@@ -1,6 +1,6 @@
 body {
     font-family: 'Press Start 2P', cursive;
-    background-color: #3E4147;
+    background-color: #282b30;
 }
 
 #root {
@@ -44,4 +44,10 @@ h1 span {
 
 .purple {
     color: #BD33A4;
+}
+
+#root canvas {
+    display: block;
+    margin: 25px auto 0;
+    border: 4px solid white;
 }
