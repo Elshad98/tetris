@@ -1,11 +1,20 @@
 class Game {
+    static points = {
+        '1': 40,
+        '2': 100,
+        '3': 300,
+        '4': 1200
+    };
     constructor() {
         this.score = 0;
-        this.lines = 0;
-        this.level = 0;
+        this.lines = 19;
         this.playfield = this.createPlayfiled();
         this.activePiece = this.createPiece();
         this.nextPiece = this.createPiece();
+    }
+
+    get level() {
+        return Math.floor(this.lines * 0.1);
     }
 
     getState() {
@@ -136,6 +145,7 @@ class Game {
         if (this.hasCollision()) {
             this.activePiece.y -= 1;
             this.lockPiece();
+            this.clearLines();
             this.updatePieces();
         }
     }
@@ -200,6 +210,44 @@ class Game {
                     this.playfield[pieceY + y][pieceX + x] = blocks[y][x];
                 }
             }
+        }
+    }
+
+    clearLines() {
+        const rows = 20;
+        const columns = 10;
+        let lines = [];
+
+        for (let y = rows - 1; y >= 0; y--) {
+            let numberOfBlocks = 0;
+
+            for (let x = 0; x < columns; x++) {
+                if (this.playfield[y][x]) {
+                    numberOfBlocks += 1;
+                }
+            }
+
+            if (numberOfBlocks === 0) {
+                break;
+            } else if (numberOfBlocks < columns) {
+                continue;
+            } else if (numberOfBlocks === columns) {
+                lines.unshift(y);
+            }
+        }
+
+        for (let index of lines) {
+            this.playfield.splice(index, 1);
+            this.playfield.unshift(new Array(columns).fill(0));
+        }
+        
+        this.updateScore(lines.length);
+    }
+
+    updateScore(clearLines) {
+        if (clearLines > 0) {
+            this.score += Game.points[clearLines] * (this.level + 1);
+            this.lines += clearLines;
         }
     }
 
