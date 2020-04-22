@@ -15,6 +15,16 @@ class View {
         this.element.appendChild(this.canvas);
     }
 
+    static colors = {
+        '1': '#43B581',
+        '2': '#F26522',
+        '3': '#4285F4',
+        '4': '#FAA61B',
+        '5': '#BD33A4',
+        '6': '#F04747',
+        '7': '#49d5ff'
+    };
+
     render({ playfield }) {
         this.clearScreen();
         this.renderPlayfield(playfield);
@@ -31,7 +41,7 @@ class View {
                 const block = line[x];
 
                 if (block) {
-                    this.renderBlock(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, '#F04747');
+                    this.renderBlock(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, View.colors[block]);
                 }
             }
         }
@@ -39,7 +49,7 @@ class View {
 
     renderBlock(x, y, width, height, color) {
         this.contenxt.fillStyle = color;
-        this.contenxt.strokeStyle = '#282b30';
+        this.contenxt.strokeStyle = '#36393e';
         this.contenxt.lineWidth = 2;
 
         this.contenxt.fillRect(x, y, width, height);

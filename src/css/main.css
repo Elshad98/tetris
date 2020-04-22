@@ -1,6 +1,6 @@
 body {
     font-family: 'Press Start 2P', cursive;
-    background-color: #282b30;
+    background-color: #292c31;
 }
 
 #root {
@@ -49,5 +49,6 @@ h1 span {
 #root canvas {
     display: block;
     margin: 25px auto 0;
-    border: 4px solid white;
+    border: 4px solid #696f75;
+    background-color: #36393e;
 }
