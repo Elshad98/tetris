@@ -37,6 +37,16 @@ class View {
     renderPlayfield(playfield) {
         for (let y = 0; y < playfield.length; y++) {
             const line = playfield[y];
+            this.contenxt.beginPath();
+            this.contenxt.moveTo(0, y * this.blockWidth);
+            this.contenxt.lineTo(this.width, y * this.blockWidth);
+
+            this.contenxt.moveTo(y * this.blockWidth, 0);
+            this.contenxt.lineTo(y * this.blockWidth, this.height);
+            this.contenxt.strokeStyle = "#696f75";
+            this.contenxt.lineWidth = .5;
+            this.contenxt.stroke();
+            this.contenxt.closePath();
             for (let x = 0; x < line.length; x++) {
                 const block = line[x];
 
@@ -50,7 +60,6 @@ class View {
     renderBlock(x, y, width, height, color) {
         this.contenxt.fillStyle = color;
         this.contenxt.strokeStyle = '#36393e';
-        this.contenxt.lineWidth = 2;
 
         this.contenxt.fillRect(x, y, width, height);
         this.contenxt.strokeRect(x, y, width, height);
