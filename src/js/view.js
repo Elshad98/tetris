@@ -16,11 +16,11 @@ class View {
     }
 
     static colors = {
-        '1': '#43B581',
+        '1': '#00E0A7',
         '2': '#F26522',
         '3': '#4285F4',
-        '4': '#FAA61B',
-        '5': '#BD33A4',
+        '4': '#FFD01A',
+        '5': '#C53DFF',
         '6': '#F04747',
         '7': '#49d5ff'
     };
@@ -48,13 +48,13 @@ class View {
         }
     }
 
-    drawLine(index) {
+    drawLine(position) {
         this.contenxt.beginPath();
-        this.contenxt.moveTo(0, index * this.blockWidth);
-        this.contenxt.lineTo(this.width, index * this.blockWidth);
+        this.contenxt.moveTo(0, position * this.blockWidth);
+        this.contenxt.lineTo(this.width, position * this.blockWidth);
 
-        this.contenxt.moveTo(index * this.blockWidth, 0);
-        this.contenxt.lineTo(index * this.blockWidth, this.height);
+        this.contenxt.moveTo(position * this.blockWidth, 0);
+        this.contenxt.lineTo(position * this.blockWidth, this.height);
         this.contenxt.strokeStyle = "#696f75";
         this.contenxt.lineWidth = .5;
         this.contenxt.stroke();
