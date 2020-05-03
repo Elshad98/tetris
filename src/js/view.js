@@ -7,7 +7,7 @@ class View {
         this.canvas = document.createElement('canvas');
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        this.contenxt = this.canvas.getContext('2d');
+        this.context = this.canvas.getContext('2d');
 
         this.blockWidth = this.width / columns;
         this.blockHeight = this.height / rows;
@@ -16,13 +16,13 @@ class View {
     }
 
     static colors = {
-        '1': '#00E0A7',
-        '2': '#F26522',
-        '3': '#4285F4',
-        '4': '#FFD01A',
-        '5': '#C53DFF',
-        '6': '#F04747',
-        '7': '#49d5ff'
+        '1': '#ffc90d',
+        '2': '#ff7f26',
+        '3': '#eb2325',
+        '4': '#23b14d',
+        '5': '#3f46cb',
+        '6': '#a349a3',
+        '7': '#01a2e8'
     };
 
     render({ playfield }) {
@@ -31,7 +31,7 @@ class View {
     }
 
     clearScreen() {
-        this.contenxt.clearRect(0, 0, this.width, this.height);
+        this.context.clearRect(0, 0, this.width, this.height);
     }
 
     renderPlayfield(playfield) {
@@ -42,31 +42,50 @@ class View {
                 const block = line[x];
 
                 if (block) {
-                    this.renderBlock(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, View.colors[block]);
+                    this.roundRect(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, 5, View.colors[block]);
                 }
             }
         }
     }
 
     drawLine(position) {
-        this.contenxt.beginPath();
-        this.contenxt.moveTo(0, position * this.blockWidth);
-        this.contenxt.lineTo(this.width, position * this.blockWidth);
+        this.context.beginPath();
+        this.context.moveTo(0, position * this.blockWidth);
+        this.context.lineTo(this.width, position * this.blockWidth);
 
-        this.contenxt.moveTo(position * this.blockWidth, 0);
-        this.contenxt.lineTo(position * this.blockWidth, this.height);
-        this.contenxt.strokeStyle = "#696f75";
-        this.contenxt.lineWidth = .5;
-        this.contenxt.stroke();
-        this.contenxt.closePath();
+        this.context.moveTo(position * this.blockWidth, 0);
+        this.context.lineTo(position * this.blockWidth, this.height);
+        this.context.strokeStyle = "#696f75";
+        this.context.lineWidth = .35;
+        this.context.stroke();
+        this.context.closePath();
     }
 
-    renderBlock(x, y, width, height, color) {
-        this.contenxt.fillStyle = color;
-        this.contenxt.strokeStyle = '#36393e';
-
-        this.contenxt.fillRect(x, y, width, height);
-        this.contenxt.strokeRect(x, y, width, height);
+    roundRect(x, y, width, height, radius = 5, color) {
+        if (typeof radius === 'number') {
+            radius = { tl: radius, tr: radius, br: radius, bl: radius };
+        } else {
+            var defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
+            for (var side in defaultRadius) {
+                radius[side] = radius[side] || defaultRadius[side];
+            }
+        }
+        this.context.beginPath();
+        this.context.fillStyle = color;
+        this.context.lineWidth = 2;
+        this.context.strokeStyle = '#f9fafb';
+        this.context.moveTo(x + radius.tl, y);
+        this.context.lineTo(x + width - radius.tr, y);
+        this.context.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+        this.context.lineTo(x + width, y + height - radius.br);
+        this.context.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+        this.context.lineTo(x + radius.bl, y + height);
+        this.context.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+        this.context.lineTo(x, y + radius.tl);
+        this.context.quadraticCurveTo(x, y, x + radius.tl, y);
+        this.context.closePath();
+        this.context.fill();
+        this.context.stroke();
     }
 }
 
