@@ -26,9 +26,11 @@ class Controller {
     }
 
     pause() {
-        this.isPlaying = false;
-        this.stopTimer();
-        this.updateView();
+        if (typeof this.intervalId === 'number') {
+            this.isPlaying = false;
+            this.stopTimer();
+            this.updateView();
+        }
     }
 
     reset() {
@@ -77,7 +79,13 @@ class Controller {
             } else {
                 this.play();
             }
-        } else if (keyCode === CONFIG.keys.LEFT) {
+        }
+
+        if (!this.isPlaying) {
+            return;
+        }
+
+        if (keyCode === CONFIG.keys.LEFT) {
             this.game.movePieceLeft();
             this.updateView();
         } else if (keyCode === CONFIG.keys.UP) {
@@ -96,7 +104,7 @@ class Controller {
     handleKeyUp(event) {
         const { keyCode } = event;
 
-        if (keyCode === CONFIG.keys.DOWN) {
+        if (keyCode === CONFIG.keys.DOWN && this.isPlaying) {
             this.startTimer();
         }
     }

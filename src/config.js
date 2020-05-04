@@ -22,7 +22,7 @@ const CONFIG = Object.freeze({
         '5': '#3f46cb',
         '6': '#a349a3',
         '7': '#01a2e8'
-    }
+    },
 });
 
 export default CONFIG;

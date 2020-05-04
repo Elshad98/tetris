@@ -5,12 +5,14 @@ import Controller from './js/controller';
 import 'reset-css';
 import './css/main.css';
 
-const element = document.getElementById('root');
+window.addEventListener('load', function() {
+    const element = document.getElementById('root');
 
-const game = new Game();
-const view = new View(element, 480, 640, 20, 10);
-const controller = new Controller(game, view);
+    const game = new Game();
+    const view = new View(element, 480, 640, 20, 10);
+    const controller = new Controller(game, view);
 
-window.game = game;
-window.view = view;
-window.controller = controller;
+    window.game = game;
+    window.view = view;
+    window.controller = controller;
+});

@@ -43,6 +43,7 @@ class Game {
         this.score = 0;
         this.lines = 0;
         this.topOut = false;
+        this.pieces = [];
         this.playfield = this.createPlayfiled();
         this.activePiece = this.createPiece();
         this.nextPiece = this.createPiece();
@@ -63,62 +64,79 @@ class Game {
     }
 
     createPiece() {
-        const index = Math.floor(Math.random() * 7);
-        const type = 'IJLOSTZ'[index];
         const piece = {};
+        const types = 'IJLOSTZ';
+        let currentType;
+        do {
+            const index = Math.floor(Math.random() * 7);
+            currentType = types[index];
 
-        if (type === 'I') {
-            piece.blocks = [
-                [0, 0, 0, 0],
-                [1, 1, 1, 1],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
-            ];
-        } else if (type === 'J') {
-            piece.blocks = [
-                [0, 0, 0],
-                [2, 2, 2],
-                [0, 0, 2]
-            ];
-        } else if (type === 'L') {
-            piece.blocks = [
-                [0, 0, 0],
-                [3, 3, 3],
-                [3, 0, 0]
-            ];
-        } else if (type === 'O') {
-            piece.blocks = [
-                [0, 0, 0, 0],
-                [0, 4, 4, 0],
-                [0, 4, 4, 0],
-                [0, 0, 0, 0]
-            ];
-        } else if (type === 'S') {
-            piece.blocks = [
-                [0, 0, 0],
-                [0, 5, 5],
-                [5, 5, 0]
-            ];
-        } else if (type === 'T') {
-            piece.blocks = [
-                [0, 0, 0],
-                [6, 6, 6],
-                [0, 6, 0]
-            ];
-        } else if (type === 'Z') {
-            piece.blocks = [
-                [0, 0, 0],
-                [7, 7, 0],
-                [0, 7, 7]
-            ];
-        } else {
-            throw new Error('Unknown type of figure');
-        }
+            if (currentType === 'I') {
+                piece.blocks = [
+                    [0, 0, 0, 0],
+                    [1, 1, 1, 1],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]
+                ];
+            } else if (currentType === 'J') {
+                piece.blocks = [
+                    [0, 0, 0],
+                    [2, 2, 2],
+                    [0, 0, 2]
+                ];
+            } else if (currentType === 'L') {
+                piece.blocks = [
+                    [0, 0, 0],
+                    [3, 3, 3],
+                    [3, 0, 0]
+                ];
+            } else if (currentType === 'O') {
+                piece.blocks = [
+                    [0, 0, 0, 0],
+                    [0, 4, 4, 0],
+                    [0, 4, 4, 0],
+                    [0, 0, 0, 0]
+                ];
+            } else if (currentType === 'S') {
+                piece.blocks = [
+                    [0, 0, 0],
+                    [0, 5, 5],
+                    [5, 5, 0]
+                ];
+            } else if (currentType === 'T') {
+                piece.blocks = [
+                    [0, 0, 0],
+                    [6, 6, 6],
+                    [0, 6, 0]
+                ];
+            } else if (currentType === 'Z') {
+                piece.blocks = [
+                    [0, 0, 0],
+                    [7, 7, 0],
+                    [0, 7, 7]
+                ];
+            } else {
+                throw new Error('Unknown type of figure');
+            }
+        } while (this.isRepeated(currentType));
 
         piece.x = Math.floor((10 - piece.blocks[0].length) / 2);
         piece.y = -1;
 
         return piece;
+    }
+
+    isRepeated(type) {
+        let result = false;
+        if (this.pieces[0] !== type) {
+            this.pieces = [type];
+        } else {
+            this.pieces.push(type);
+        }
+        if (this.pieces.length > 2) {
+            result = true;
+        }
+        return result;
     }
 
     movePieceLeft() {

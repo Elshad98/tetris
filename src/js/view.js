@@ -39,34 +39,29 @@ class View {
     }
 
     renderStartScreen() {
-        this.context.fillStyle = 'white';
-        this.context.font = '18px "Press Start 2P"';
-        this.context.textAlign = 'center';
-        this.context.textBaseline = 'middle';
-        this.context.fillText('Press ENTER to Start', this.width / 2, this.height / 2);
+        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Start', this.width / 2, this.height / 2);
     }
 
     renderPauseScreen() {
         this.context.fillStyle = 'rgba(0, 0, 0, 0.75)';
         this.context.fillRect(0, 0, this.width, this.height);
-
-        this.context.fillStyle = 'white';
-        this.context.font = '18px "Press Start 2P"';
-        this.context.textAlign = 'center';
-        this.context.textBaseline = 'middle';
-        this.context.fillText('Press ENTER to Resume', this.width / 2, this.height / 2);
+        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Resume', this.width / 2, this.height / 2);
     }
 
     renderEndScreen({ score }) {
         this.clearScreen();
 
-        this.context.fillStyle = 'white';
-        this.context.font = '18px "Press Start 2P"';
-        this.context.textAlign = 'center';
-        this.context.textBaseline = 'middle';
-        this.context.fillText('GAME OVER', this.width / 2, this.height / 2 - 48);
-        this.context.fillText(`Score: ${score}`, this.width / 2, this.height / 2);
-        this.context.fillText('Press ENTER to Restart', this.width / 2, this.height / 2 + 48);
+        this.renderText('white', '18px', 'center', 'middle', 'GAME OVER', this.width / 2, this.height / 2 - 48);
+        this.renderText('white', '18px', 'center', 'middle', `Score: ${score}`, this.width / 2, this.height / 2);
+        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Restart', this.width / 2, this.height / 2 + 48);
+    }
+
+    renderText(color, size, align, baseLine, text, x, y) {
+        this.context.fillStyle = color;
+        this.context.font = `${size} "Press Start 2P"`;
+        this.context.textAlign = align;
+        this.context.textBaseline = baseLine;
+        this.context.fillText(text, x, y);
     }
 
     renderPlayfield({ playfield }) {
@@ -112,15 +107,10 @@ class View {
     }
 
     renderPanel({ level, score, lines, nextPiece }) {
-        this.context.textAlign = 'start';
-        this.context.textBaseline = 'top';
-        this.context.fillStyle = 'white';
-        this.context.font = '14px "Press Start 2P"';
-
-        this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 8);
-        this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 32);
-        this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 56);
-        this.context.fillText(`Next:`, this.panelX + 0, this.panelY + 104);
+        this.renderText('white', '14px', 'start', 'top', `Score: ${score}`, this.panelX, this.panelY + 8);
+        this.renderText('white', '14px', 'start', 'top', `Level: ${level}`, this.panelX, this.panelY + 32);
+        this.renderText('white', '14px', 'start', 'top', `Lines: ${lines}`, this.panelX, this.panelY + 56);
+        this.renderText('white', '14px', 'start', 'top', `Next:`, this.panelX + 0, this.panelY + 104);
 
         for (let y = 0; y < nextPiece.blocks.length; y++) {
             for (let x = 0; x < nextPiece.blocks[y].length; x++) {
