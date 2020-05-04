@@ -1,10 +1,6 @@
+import CONFIG from '../config';
+
 class Game {
-    static points = {
-        '1': 10,
-        '2': 25,
-        '3': 75,
-        '4': 100
-    };
     constructor() {
         this.reset();
     }
@@ -71,60 +67,52 @@ class Game {
         const type = 'IJLOSTZ'[index];
         const piece = {};
 
-        switch (type) {
-            case 'I':
-                piece.blocks = [
-                    [0, 0, 0, 0],
-                    [1, 1, 1, 1],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]
-                ];
-                break;
-            case 'J':
-                piece.blocks = [
-                    [0, 0, 0],
-                    [2, 2, 2],
-                    [0, 0, 2]
-                ];
-                break;
-            case 'L':
-                piece.blocks = [
-                    [0, 0, 0],
-                    [3, 3, 3],
-                    [3, 0, 0]
-                ];
-                break;
-            case 'O':
-                piece.blocks = [
-                    [0, 0, 0, 0],
-                    [0, 4, 4, 0],
-                    [0, 4, 4, 0],
-                    [0, 0, 0, 0]
-                ];
-                break;
-            case 'S':
-                piece.blocks = [
-                    [0, 0, 0],
-                    [0, 5, 5],
-                    [5, 5, 0]
-                ];
-                break;
-            case 'T':
-                piece.blocks = [
-                    [0, 0, 0],
-                    [6, 6, 6],
-                    [0, 6, 0]
-                ];
-                break;
-            case 'Z':
-                piece.blocks = [
-                    [0, 0, 0],
-                    [7, 7, 0],
-                    [0, 7, 7]
-                ];
-                break;
-            default:
-                throw new Error('Unknown type of figure');
+        if (type === 'I') {
+            piece.blocks = [
+                [0, 0, 0, 0],
+                [1, 1, 1, 1],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+            ];
+        } else if (type === 'J') {
+            piece.blocks = [
+                [0, 0, 0],
+                [2, 2, 2],
+                [0, 0, 2]
+            ];
+        } else if (type === 'L') {
+            piece.blocks = [
+                [0, 0, 0],
+                [3, 3, 3],
+                [3, 0, 0]
+            ];
+        } else if (type === 'O') {
+            piece.blocks = [
+                [0, 0, 0, 0],
+                [0, 4, 4, 0],
+                [0, 4, 4, 0],
+                [0, 0, 0, 0]
+            ];
+        } else if (type === 'S') {
+            piece.blocks = [
+                [0, 0, 0],
+                [0, 5, 5],
+                [5, 5, 0]
+            ];
+        } else if (type === 'T') {
+            piece.blocks = [
+                [0, 0, 0],
+                [6, 6, 6],
+                [0, 6, 0]
+            ];
+        } else if (type === 'Z') {
+            piece.blocks = [
+                [0, 0, 0],
+                [7, 7, 0],
+                [0, 7, 7]
+            ];
+        } else {
+            throw new Error('Unknown type of figure');
         }
 
         piece.x = Math.floor((10 - piece.blocks[0].length) / 2);
@@ -263,7 +251,7 @@ class Game {
 
     updateScore(clearLines) {
         if (clearLines > 0) {
-            this.score += Game.points[clearLines] * (this.level + 1);
+            this.score += CONFIG.points[clearLines] * (this.level + 1);
             this.lines += clearLines;
         }
     }

@@ -1,3 +1,5 @@
+import CONFIG from "../config";
+
 class Controller {
     constructor(game, view) {
         this.game = game;
@@ -40,7 +42,7 @@ class Controller {
         if (!this.intervalId) {
             this.intervalId = setInterval(() => {
                 this.update();
-            }, speed > 400 ? speed : 400);
+            }, speed >= 400 ? speed : 400);
         }
     }
 
@@ -65,41 +67,37 @@ class Controller {
 
     handleKeyDown(event) {
         const state = this.game.getState();
-        switch (event.keyCode) {
-            case 13: // ENTER
-                if (state.isGameOver) {
-                    this.reset();
-                } else if (this.isPlaying) {
-                    this.pause();
-                } else {
-                    this.play();
-                }
-                break;
-            case 37: // LEFT ARROW
-                this.game.movePieceLeft();
-                this.updateView();
-                break;
-            case 38: // UP ARROW
-                this.game.rotatePiece();
-                this.updateView();
-                break;
-            case 39: //  RIGHT ARROW
-                this.game.movePieceRight();
-                this.updateView();
-                break;
-            case 40: //  DOWN ARROW
-                this.stopTimer();
-                this.game.movePieceDown();
-                this.updateView();
-                break;
+        const { keyCode } = event;
+
+        if (keyCode === CONFIG.keys.ENTER) {
+            if (state.isGameOver) {
+                this.reset();
+            } else if (this.isPlaying) {
+                this.pause();
+            } else {
+                this.play();
+            }
+        } else if (keyCode === CONFIG.keys.LEFT) {
+            this.game.movePieceLeft();
+            this.updateView();
+        } else if (keyCode === CONFIG.keys.UP) {
+            this.game.rotatePiece();
+            this.updateView();
+        } else if (keyCode === CONFIG.keys.RIGHT) {
+            this.game.movePieceRight();
+            this.updateView();
+        } else if (keyCode === CONFIG.keys.DOWN) {
+            this.stopTimer();
+            this.game.movePieceDown();
+            this.updateView();
         }
     }
 
     handleKeyUp(event) {
-        switch (event.keyCode) {
-            case 40: //  DOWN ARROW
-                this.startTimer();
-                break;
+        const { keyCode } = event;
+
+        if (keyCode === CONFIG.keys.DOWN) {
+            this.startTimer();
         }
     }
 }
