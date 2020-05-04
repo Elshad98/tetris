@@ -7,7 +7,7 @@ class Game {
     };
     constructor() {
         this.score = 0;
-        this.lines = 19;
+        this.lines = 0;
         this.playfield = this.createPlayfiled();
         this.activePiece = this.createPiece();
         this.nextPiece = this.createPiece();
@@ -38,7 +38,11 @@ class Game {
         }
 
         return {
-            playfield: playfield
+            playfield: playfield,
+            level: this.level,
+            lines: this.lines,
+            nextPiece: this.nextPiece,
+            score: this.score
         };
     }
 
@@ -240,7 +244,7 @@ class Game {
             this.playfield.splice(index, 1);
             this.playfield.unshift(new Array(columns).fill(0));
         }
-        
+
         this.updateScore(lines.length);
     }
 
