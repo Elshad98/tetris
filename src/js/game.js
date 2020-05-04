@@ -1,9 +1,9 @@
 class Game {
     static points = {
-        '1': 40,
-        '2': 100,
-        '3': 300,
-        '4': 1200
+        '1': 10,
+        '2': 25,
+        '3': 75,
+        '4': 100
     };
     constructor() {
         this.score = 0;

@@ -10,19 +10,17 @@ class View {
         this.context = this.canvas.getContext('2d');
 
         this.playfieldBorderWidth = 4;
-        this.playfieldX = this.playfieldBorderWidth;
-        this.playfieldY = this.playfieldBorderWidth;
-        this.playfieldWidth = this.width * 2 / 3;
+        this.playfieldWidth = Math.floor(this.width * 2 / 3);
         this.playfieldHeight = this.height;
-        this.playfieldInnerWidth = this.playfieldWidth - this.playfieldBorderWidth * 2;
-        this.playfieldInnerHeight = this.playfieldHeight - this.playfieldBorderWidth * 2;
+        this.playfieldInnerWidth = this.playfieldWidth;
+        this.playfieldInnerHeight = this.playfieldHeight;
 
-        this.blockWidth = this.playfieldInnerWidth / columns;
-        this.blockHeight = this.playfieldInnerHeight / rows;
+        this.blockWidth = Math.floor(this.playfieldInnerWidth / columns);
+        this.blockHeight = Math.floor(this.playfieldInnerHeight / rows);
 
         this.panelX = this.playfieldWidth + 10;
         this.panelY = 0;
-        this.panelWidth = this.width / 3;
+        this.panelWidth = Math.floor(this.width / 3);
         this.panelHeight = this.height;
 
         this.element.appendChild(this.canvas);
@@ -80,14 +78,14 @@ class View {
 
     renderPlayfield({ playfield }) {
         for (let y = 0; y < playfield.length; y++) {
-            this.drawLine(y);
+            this.drawGrid(y);
             for (let x = 0; x < playfield[y].length; x++) {
                 const block = playfield[y][x];
 
                 if (block) {
                     this.roundRect(
-                        this.playfieldX + (x * this.blockWidth),
-                        this.playfieldY + (y * this.blockHeight),
+                        x * this.blockWidth,
+                        y * this.blockHeight,
                         this.blockWidth,
                         this.blockHeight,
                         5,
@@ -96,18 +94,24 @@ class View {
             }
         }
 
+        this.context.beginPath();
+        this.context.moveTo(this.playfieldInnerWidth + this.playfieldBorderWidth, 0);
+        this.context.lineTo(this.playfieldInnerWidth + this.playfieldBorderWidth, this.playfieldInnerHeight);
         this.context.strokeStyle = '#696f75';
         this.context.lineWidth = this.playfieldBorderWidth;
-        this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
+        this.context.stroke();
+        this.context.closePath();
     }
 
-    drawLine(position) {
+    drawGrid(position) {
         this.context.beginPath();
-        this.context.moveTo(0, this.playfieldX + (position * this.blockWidth) + this.playfieldBorderWidth);
-        this.context.lineTo(this.playfieldInnerWidth + this.playfieldBorderWidth * 2, this.playfieldY + (position * this.blockWidth) + this.playfieldBorderWidth);
+        this.context.moveTo(0, position * this.blockWidth);
+        this.context.lineTo(this.playfieldInnerWidth + this.playfieldBorderWidth, position * this.blockWidth);
 
-        // this.context.moveTo(this.playfieldX + (position * this.blockWidth), this.playfieldBorderWidth);
-        // this.context.lineTo(this.playfieldY + (position * this.blockWidth), this.playfieldInnerHeight);
+        if (position < 10) {
+            this.context.moveTo(position * this.blockWidth, 0);
+            this.context.lineTo(position * this.blockWidth, this.playfieldInnerHeight);
+        }
         this.context.strokeStyle = "#696f75";
         this.context.lineWidth = .35;
         this.context.stroke();
