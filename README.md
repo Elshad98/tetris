@@ -2,7 +2,7 @@
   
 A classic tetris game written in JavaScript programming language, and the HTML5 canvas       
 The main purpose of this application is to learn JavaScript.     
-Check the demo:     
+Check the demo: [https://elshad98.github.io/tetris](https://elshad98.github.io/tetris)    
 
 ## Instructions
 
