@@ -6,11 +6,7 @@ class Game {
         '4': 100
     };
     constructor() {
-        this.score = 0;
-        this.lines = 0;
-        this.playfield = this.createPlayfiled();
-        this.activePiece = this.createPiece();
-        this.nextPiece = this.createPiece();
+        this.reset();
     }
 
     get level() {
@@ -42,8 +38,18 @@ class Game {
             level: this.level,
             lines: this.lines,
             nextPiece: this.nextPiece,
-            score: this.score
+            score: this.score,
+            isGameOver: this.topOut
         };
+    }
+
+    reset() {
+        this.score = 0;
+        this.lines = 0;
+        this.topOut = false;
+        this.playfield = this.createPlayfiled();
+        this.activePiece = this.createPiece();
+        this.nextPiece = this.createPiece();
     }
 
     createPlayfiled() {
@@ -144,6 +150,9 @@ class Game {
     }
 
     movePieceDown() {
+        if (this.topOut) {
+            return;
+        }
         this.activePiece.y += 1;
 
         if (this.hasCollision()) {
@@ -151,6 +160,10 @@ class Game {
             this.lockPiece();
             this.clearLines();
             this.updatePieces();
+        }
+
+        if (this.hasCollision()) {
+            this.topOut = true;
         }
     }
 
