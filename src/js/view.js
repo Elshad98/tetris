@@ -106,11 +106,14 @@ class View {
         this.context.closePath();
     }
 
-    renderPanel({ level, score, lines, nextPiece }) {
+    renderPanel({ level, score, lines, nextPiece, highScore }) {
         this.renderText('white', '14px', 'start', 'top', `Score: ${score}`, this.panelX, this.panelY + 8);
         this.renderText('white', '14px', 'start', 'top', `Level: ${level}`, this.panelX, this.panelY + 32);
         this.renderText('white', '14px', 'start', 'top', `Lines: ${lines}`, this.panelX, this.panelY + 56);
         this.renderText('white', '14px', 'start', 'top', `Next:`, this.panelX + 0, this.panelY + 104);
+        if (highScore > 0) {
+            this.renderText('white', '14px', 'start', 'top', `HI: ${highScore}`, this.panelX, this.panelHeight - 20);
+        }
 
         for (let y = 0; y < nextPiece.blocks.length; y++) {
             for (let x = 0; x < nextPiece.blocks[y].length; x++) {

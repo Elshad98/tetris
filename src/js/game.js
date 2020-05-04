@@ -35,7 +35,8 @@ class Game {
             lines: this.lines,
             nextPiece: this.nextPiece,
             score: this.score,
-            isGameOver: this.topOut
+            isGameOver: this.topOut,
+            highScore: this.highScore
         };
     }
 
@@ -44,6 +45,7 @@ class Game {
         this.lines = 0;
         this.topOut = false;
         this.pieces = [];
+        this.highScore = this.getHighScore();
         this.playfield = this.createPlayfiled();
         this.activePiece = this.createPiece();
         this.nextPiece = this.createPiece();
@@ -170,6 +172,9 @@ class Game {
 
         if (this.hasCollision()) {
             this.topOut = true;
+            if (this.score > this.highScore) {
+                localStorage.setItem('highScore', this.score);
+            }
         }
     }
 
@@ -285,6 +290,15 @@ class Game {
     updatePieces() {
         this.activePiece = this.nextPiece;
         this.nextPiece = this.createPiece();
+    }
+
+    getHighScore() {
+        let highScore = localStorage.getItem('highScore');
+        if (/^\d+$/.test(highScore)) {
+            return Number(highScore);
+        } else {
+            return 0;
+        }
     }
 }
 
