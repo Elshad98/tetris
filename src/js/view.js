@@ -12,7 +12,7 @@ class View {
         this.context = this.canvas.getContext('2d');
 
         this.playfieldBorderWidth = 4;
-        this.playfieldWidth = Math.floor(this.width * 2 / 3);
+        this.playfieldWidth = Math.floor(this.width * 0.64);
         this.playfieldHeight = this.height;
         this.playfieldInnerWidth = this.playfieldWidth;
         this.playfieldInnerHeight = this.playfieldHeight;
@@ -22,7 +22,7 @@ class View {
 
         this.panelX = this.playfieldWidth + 10;
         this.panelY = 0;
-        this.panelWidth = Math.floor(this.width / 3);
+        this.panelWidth = Math.floor(this.width * 0.36);
         this.panelHeight = this.height;
 
         this.element.appendChild(this.canvas);

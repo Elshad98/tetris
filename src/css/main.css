@@ -23,27 +23,27 @@ h1 span {
 }
 
 .red {
-    color: #F04747;
+    color: #eb2325;
 }
 
 .orange {
-    color: #F26522;
+    color: #ff7f26;
 }
 
 .yellow {
-    color: #FAA61B;
+    color: #ffc90d;
 }
 
 .green {
-    color: #43B581;
+    color: #23b14d;
 }
 
 .blue {
-    color: #4285F4;
+    color: #01a2e8;
 }
 
 .purple {
-    color: #BD33A4;
+    color: #a349a3;
 }
 
 #root canvas {

@@ -23,6 +23,13 @@ const CONFIG = Object.freeze({
         '6': '#a349a3',
         '7': '#01a2e8'
     },
+
+    playField: {
+        WIDTH: 500,
+        HEIGHT: 640,
+        COLUMNS: 10,
+        ROWS: 20,
+    },
 });
 
 export default CONFIG;

@@ -10,7 +10,7 @@ class Game {
     }
 
     getState() {
-        const playfield = this.createPlayfiled();
+        const playfield = this.createPlayfield();
         const { y: pieceY, x: pieceX, blocks } = this.activePiece;
 
         for (let y = 0; y < this.playfield.length; y++) {
@@ -46,18 +46,18 @@ class Game {
         this.topOut = false;
         this.pieces = [];
         this.highScore = this.getHighScore();
-        this.playfield = this.createPlayfiled();
+        this.playfield = this.createPlayfield();
         this.activePiece = this.createPiece();
         this.nextPiece = this.createPiece();
     }
 
-    createPlayfiled() {
+    createPlayfield() {
         const playfield = [];
 
-        for (let y = 0; y < 20; y++) {
+        for (let y = 0; y < CONFIG.playField.ROWS; y++) {
             playfield[y] = [];
 
-            for (let x = 0; x < 10; x++) {
+            for (let x = 0; x < CONFIG.playField.COLUMNS; x++) {
                 playfield[y][x] = 0;
             }
         }
@@ -242,14 +242,13 @@ class Game {
     }
 
     clearLines() {
-        const rows = 20;
-        const columns = 10;
+        const { COLUMNS, ROWS } = CONFIG.playField;
         let lines = [];
 
-        for (let y = rows - 1; y >= 0; y--) {
+        for (let y = ROWS - 1; y >= 0; y--) {
             let numberOfBlocks = 0;
 
-            for (let x = 0; x < columns; x++) {
+            for (let x = 0; x < COLUMNS; x++) {
                 if (this.playfield[y][x]) {
                     numberOfBlocks += 1;
                 }
@@ -257,16 +256,16 @@ class Game {
 
             if (numberOfBlocks === 0) {
                 break;
-            } else if (numberOfBlocks < columns) {
+            } else if (numberOfBlocks < COLUMNS) {
                 continue;
-            } else if (numberOfBlocks === columns) {
+            } else if (numberOfBlocks === COLUMNS) {
                 lines.unshift(y);
             }
         }
 
         for (let index of lines) {
             this.playfield.splice(index, 1);
-            this.playfield.unshift(this.getArray(columns, 0));
+            this.playfield.unshift(this.getArray(COLUMNS, 0));
         }
 
         this.updateScore(lines.length);
