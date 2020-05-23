@@ -56,6 +56,17 @@ const config = {
                 query: { mimetype: "image/x-icon" }
             },
             {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/',
+                        publicPath: '../fonts/'
+                    }
+                }]
+            },
+            {
                 test: /\.(jpg|png|gif)$/,
                 use: [{
                     loader: 'file-loader',

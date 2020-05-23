@@ -1,5 +1,15 @@
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('../fonts/PressStart2P-Regular.eot');
+    src: url('../fonts/PressStart2P-Regular.eot?#iefix') format('eot'),
+    url('../fonts/PressStart2P-Regular.woff') format('woff'),
+    url('../fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     background-color: #292c31;
 }
 

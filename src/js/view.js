@@ -1,6 +1,14 @@
-import CONFIG from '../config';
-
 class View {
+    static colors = {
+        '1': '#ffc90d',
+        '2': '#ff7f26',
+        '3': '#eb2325',
+        '4': '#23b14d',
+        '5': '#3f46cb',
+        '6': '#a349a3',
+        '7': '#01a2e8'
+    }
+
     constructor(element, width, height, rows, columns) {
         this.element = element;
         this.width = width;
@@ -77,7 +85,7 @@ class View {
                         this.blockWidth,
                         this.blockHeight,
                         5,
-                        CONFIG.colors[block]);
+                        View.colors[block]);
                 }
             }
         }
@@ -126,7 +134,7 @@ class View {
                         this.blockWidth * 0.65,
                         this.blockHeight * 0.65,
                         5,
-                        CONFIG.colors[block]);
+                        View.colors[block]);
                 }
             }
         }

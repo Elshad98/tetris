@@ -1,6 +1,13 @@
 import CONFIG from '../config';
 
 class Game {
+    static points = {
+        '1': 10,
+        '2': 25,
+        '3': 75,
+        '4': 100
+    }
+
     constructor() {
         this.reset();
     }
@@ -281,7 +288,7 @@ class Game {
 
     updateScore(clearLines) {
         if (clearLines > 0) {
-            this.score += CONFIG.points[clearLines] * (this.level + 1);
+            this.score += Game.points[clearLines] * (this.level + 1);
             this.lines += clearLines;
         }
     }
@@ -295,7 +302,7 @@ class Game {
         let highScore;
         try {
             highScore = localStorage.getItem('highScore');
-        } catch(e) {
+        } catch (e) {
             console.error(e.message);
         }
         if (/^\d+$/.test(highScore)) {

@@ -1,6 +1,12 @@
-import CONFIG from "../config";
-
 class Controller {
+    static keys = {
+        RIGHT: 39,
+        LEFT: 37,
+        UP: 38,
+        DOWN: 40,
+        ENTER: 13,
+    }
+
     constructor(game, view) {
         this.game = game;
         this.view = view;
@@ -12,8 +18,8 @@ class Controller {
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
-        window.addEventListener('blur', this.pause.bind(this));
         document.addEventListener('click', this.handleClick.bind(this));
+        window.addEventListener('blur', this.pause.bind(this));
         this.view.canvas.addEventListener('touchstart', this.handleTouchStart.bind(this));
         this.view.canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
         this.view.canvas.addEventListener('touchend', this.handleTouchEnd.bind(this));
@@ -187,22 +193,22 @@ class Controller {
 
     handleKeyDown(evt) {
         const { keyCode } = evt;
-        if (keyCode === CONFIG.keys.ENTER) {
+        if (keyCode === Controller.keys.ENTER) {
             this.handleClick();
-        } else if (keyCode === CONFIG.keys.LEFT) {
+        } else if (keyCode === Controller.keys.LEFT) {
             this.onLeft();
-        } else if (keyCode === CONFIG.keys.UP) {
+        } else if (keyCode === Controller.keys.UP) {
             this.onUp();
-        } else if (keyCode === CONFIG.keys.RIGHT) {
+        } else if (keyCode === Controller.keys.RIGHT) {
             this.onRight();
-        } else if (keyCode === CONFIG.keys.DOWN) {
+        } else if (keyCode === Controller.keys.DOWN) {
             this.onDown();
         }
     }
 
     handleKeyUp(evt) {
         const { keyCode } = evt;
-        if (keyCode === CONFIG.keys.DOWN && this.isPlaying) {
+        if (keyCode === Controller.keys.DOWN && this.isPlaying) {
             this.startTimer();
         }
     }
