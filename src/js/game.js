@@ -292,7 +292,12 @@ class Game {
     }
 
     getHighScore() {
-        let highScore = localStorage.getItem('highScore');
+        let highScore;
+        try {
+            highScore = localStorage.getItem('highScore');
+        } catch(e) {
+            console.error(e.message);
+        }
         if (/^\d+$/.test(highScore)) {
             return Number(highScore);
         } else {

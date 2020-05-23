@@ -13,10 +13,10 @@ class Controller {
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
         window.addEventListener('blur', this.pause.bind(this));
-        // view.canvas.addEventListener('click', this.handleClick.bind(this));
-        document.addEventListener('touchstart', this.handleTouchStart.bind(this));
-        document.addEventListener('touchmove', this.handleTouchMove.bind(this));
-        document.addEventListener('touchend', this.handleTouchEnd.bind(this));
+        document.addEventListener('click', this.handleClick.bind(this));
+        this.view.canvas.addEventListener('touchstart', this.handleTouchStart.bind(this));
+        this.view.canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
+        this.view.canvas.addEventListener('touchend', this.handleTouchEnd.bind(this));
         this.view.renderStartScreen();
     }
 
@@ -74,14 +74,28 @@ class Controller {
     }
 
     handleTouchStart(evt) {
-        this.handleMouseDown();
-        const firstTouch = evt.touches[0];
-        this.xDown = firstTouch.clientX;
-        this.yDown = firstTouch.clientY;
+        if (evt.preventDefault && evt.cancelable) {
+            evt.preventDefault();
+        } else if (evt.returnValue && evt.cancelable) {
+            evt.returnValue = false
+        }
+        evt.stopPropagation();
+        if (this.isPlaying) {
+            this.handleMouseDown();
+            const firstTouch = evt.touches[0];
+            this.xDown = firstTouch.clientX;
+            this.yDown = firstTouch.clientY;
+        }
     };
 
     handleTouchMove(evt) {
-        if (!this.xDown || !this.yDown) {
+        if (evt.preventDefault && evt.cancelable) {
+            evt.preventDefault();
+        } else if (evt.returnValue && evt.cancelable) {
+            evt.returnValue = false
+        }
+        evt.stopPropagation();
+        if ((!this.xDown || !this.yDown) && !this.isPlaying) {
             return;
         }
 
@@ -93,13 +107,13 @@ class Controller {
 
         if (Math.abs(xDiff) > Math.abs(yDiff)) {
             if (xDiff > 0) {
-                this.onLeftSwipe();
+                this.onLeft();
             } else {
-                this.onRightSwipe();
+                this.onRight();
             }
         } else {
             if (yDiff > 0) {
-                this.onUpSwipe();
+                this.onUp();
             }
         }
 
@@ -107,21 +121,21 @@ class Controller {
         this.yDown = null;
     };
 
-    onLeftSwipe() {
+    onLeft() {
         if (this.isPlaying) {
             this.game.movePieceLeft();
             this.updateView();
         }
     }
 
-    onRightSwipe() {
+    onRight() {
         if (this.isPlaying) {
             this.game.movePieceRight();
             this.updateView();
         }
     }
 
-    onUpSwipe() {
+    onUp() {
         if (this.isPlaying) {
             this.game.rotatePiece();
             this.updateView();
@@ -154,8 +168,15 @@ class Controller {
     }
 
     handleTouchEnd(evt) {
-        evt.preventDefault();
-        this.handleMouseUp();
+        if (evt.preventDefault && evt.cancelable) {
+            evt.preventDefault();
+        } else if (evt.returnValue && evt.cancelable) {
+            evt.returnValue = false
+        }
+        evt.stopPropagation();
+        if (this.isPlaying) {
+            this.handleMouseUp();
+        }
     }
 
     handleMouseUp() {
@@ -167,22 +188,15 @@ class Controller {
     handleKeyDown(evt) {
         const { keyCode } = evt;
         if (keyCode === CONFIG.keys.ENTER) {
-            const state = this.game.getState();
-            if (state.isGameOver) {
-                this.reset();
-            } else if (this.isPlaying) {
-                this.pause();
-            } else {
-                this.play();
-            }
+            this.handleClick();
         } else if (keyCode === CONFIG.keys.LEFT) {
-            this.onLeftSwipe();
+            this.onLeft();
         } else if (keyCode === CONFIG.keys.UP) {
-            this.onUpSwipe();
+            this.onUp();
         } else if (keyCode === CONFIG.keys.RIGHT) {
-            this.onRightSwipe();
+            this.onRight();
         } else if (keyCode === CONFIG.keys.DOWN) {
-            this.handleMouseDown();
+            this.onDown();
         }
     }
 
