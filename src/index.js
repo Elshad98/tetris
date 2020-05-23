@@ -14,8 +14,4 @@ window.addEventListener('load', function() {
     const game = new Game();
     const view = new View(element, WIDTH, HEIGHT, ROWS, COLUMNS);
     const controller = new Controller(game, view);
-
-    window.game = game;
-    window.view = view;
-    window.controller = controller;
 });

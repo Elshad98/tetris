@@ -265,13 +265,13 @@ class Game {
 
         for (let index of lines) {
             this.playfield.splice(index, 1);
-            this.playfield.unshift(this.getArray(COLUMNS, 0));
+            this.playfield.unshift(this.getPlayfieldLine(COLUMNS, 0));
         }
 
         this.updateScore(lines.length);
     }
 
-    getArray(length, value) {
+    getPlayfieldLine(length, value) {
         let arr = new Array(length);
         for (let i = 0; i < arr.length; i++) {
             arr[i] = value;
