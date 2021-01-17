@@ -1,12 +1,16 @@
-import CONFIG from '../config';
+import CONFIG from './config';
 
 class Game {
+
     static points = {
         '1': 10,
         '2': 25,
         '3': 75,
         '4': 100
     }
+
+    static TYPES = 'IJLOSTZ';
+    static NUMBER_SHAPES = 7;
 
     constructor() {
         this.reset();
@@ -61,10 +65,10 @@ class Game {
     createPlayfield() {
         const playfield = [];
 
-        for (let y = 0; y < CONFIG.playField.ROWS; y++) {
+        for (let y = 0; y < CONFIG.playField.rows; y++) {
             playfield[y] = [];
 
-            for (let x = 0; x < CONFIG.playField.COLUMNS; x++) {
+            for (let x = 0; x < CONFIG.playField.columns; x++) {
                 playfield[y][x] = 0;
             }
         }
@@ -74,11 +78,10 @@ class Game {
 
     createPiece() {
         const piece = {};
-        const types = 'IJLOSTZ';
         let currentType;
         do {
-            const index = Math.floor(Math.random() * 7);
-            currentType = types[index];
+            const index = Math.floor(Math.random() * Game.NUMBER_SHAPES);
+            currentType = Game.TYPES[index];
 
             if (currentType === 'I') {
                 piece.blocks = [
@@ -249,13 +252,13 @@ class Game {
     }
 
     clearLines() {
-        const { COLUMNS, ROWS } = CONFIG.playField;
+        const { columns, rows } = CONFIG.playField;
         let lines = [];
 
-        for (let y = ROWS - 1; y >= 0; y--) {
+        for (let y = rows - 1; y >= 0; y--) {
             let numberOfBlocks = 0;
 
-            for (let x = 0; x < COLUMNS; x++) {
+            for (let x = 0; x < columns; x++) {
                 if (this.playfield[y][x]) {
                     numberOfBlocks += 1;
                 }
@@ -263,16 +266,16 @@ class Game {
 
             if (numberOfBlocks === 0) {
                 break;
-            } else if (numberOfBlocks < COLUMNS) {
+            } else if (numberOfBlocks < columns) {
                 continue;
-            } else if (numberOfBlocks === COLUMNS) {
+            } else if (numberOfBlocks === columns) {
                 lines.unshift(y);
             }
         }
 
         for (let index of lines) {
             this.playfield.splice(index, 1);
-            this.playfield.unshift(this.getPlayfieldLine(COLUMNS, 0));
+            this.playfield.unshift(this.getPlayfieldLine(columns, 0));
         }
 
         this.updateScore(lines.length);
@@ -302,8 +305,8 @@ class Game {
         let highScore;
         try {
             highScore = localStorage.getItem('highScore');
-        } catch (e) {
-            console.error(e.message);
+        } catch (error) {
+            console.error(error.message);
         }
         if (/^\d+$/.test(highScore)) {
             return Number(highScore);

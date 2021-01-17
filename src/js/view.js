@@ -1,4 +1,5 @@
 class View {
+
     static colors = {
         '1': '#ffc90d',
         '2': '#ff7f26',
