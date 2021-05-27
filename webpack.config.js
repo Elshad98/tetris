@@ -27,7 +27,7 @@ const config = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
-                        loader: "css-loader", options: {}
+                        loader: 'css-loader'
                     },
                     {
                         loader: 'postcss-loader',
@@ -39,21 +39,21 @@ const config = {
                                 }),
                             ],
                         },
-                    },
-                ]
-            },
-            {
-                test: /\.html$/,
-                use: [
-                    {
-                        loader: "html-loader"
                     }
                 ]
             },
             {
+                test: /\.html$/,
+                use: [{
+                    loader: 'html-loader'
+                }]
+            },
+            {
                 test: /\.ico$/,
-                loader: "url-loader",
-                query: { mimetype: "image/x-icon" }
+                loader: 'url-loader',
+                query: {
+                    mimetype: ''
+                }
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -98,12 +98,12 @@ const config = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: __dirname + "/public/index.html",
-            favicon: __dirname + "/public/favicon.ico",
+            template: __dirname + '/public/index.html',
+            favicon: __dirname + '/public/favicon.ico',
             inject: 'body',
             files: {
-                css: [__dirname + "main.css"],
-                js: [__dirname + "main.js"],
+                css: [__dirname + 'main.css'],
+                js: [__dirname + 'main.js'],
             }
         })
     ]
