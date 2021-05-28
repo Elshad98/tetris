@@ -67,7 +67,7 @@ class View {
 
     renderText(color, size, align, baseLine, text, x, y) {
         this.context.fillStyle = color;
-        this.context.font = `${size} "Press Start 2P"`;
+        this.context.font = `${size} 'Press Start 2P'`;
         this.context.textAlign = align;
         this.context.textBaseline = baseLine;
         this.context.fillText(text, x, y);
@@ -135,7 +135,8 @@ class View {
                         this.blockWidth * 0.65,
                         this.blockHeight * 0.65,
                         5,
-                        View.colors[block]);
+                        View.colors[block]
+                    );
                 }
             }
         }

@@ -9,7 +9,7 @@ class Controller {
     };
 
     static MAX_UPDATE_INTERVAL = 800;
-    static MIN_UPDATE_INTERVAL = 300;
+    static MIN_UPDATE_INTERVAL = 200;
 
     constructor(game, view) {
         this.game = game;

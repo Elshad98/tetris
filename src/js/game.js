@@ -1,4 +1,4 @@
-import CONFIG from './config';
+import APP_CONFIG from './config';
 
 class Game {
 
@@ -65,10 +65,10 @@ class Game {
     createPlayfield() {
         const playfield = [];
 
-        for (let y = 0; y < CONFIG.playField.rows; y++) {
+        for (let y = 0; y < APP_CONFIG.playField.rows; y++) {
             playfield[y] = [];
 
-            for (let x = 0; x < CONFIG.playField.columns; x++) {
+            for (let x = 0; x < APP_CONFIG.playField.columns; x++) {
                 playfield[y][x] = 0;
             }
         }
@@ -252,7 +252,7 @@ class Game {
     }
 
     clearLines() {
-        const { columns, rows } = CONFIG.playField;
+        const { columns, rows } = APP_CONFIG.playField;
         let lines = [];
 
         for (let y = rows - 1; y >= 0; y--) {
