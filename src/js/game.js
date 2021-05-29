@@ -1,16 +1,7 @@
-import APP_CONFIG from './config';
+import { COLUMNS, ROWS, NUMBER_SHAPES, TYPES, POINTS } from './constants';
+import GameUtils from './utils/game-utils';
 
 class Game {
-
-    static points = {
-        '1': 10,
-        '2': 25,
-        '3': 75,
-        '4': 100
-    }
-
-    static TYPES = 'IJLOSTZ';
-    static NUMBER_SHAPES = 7;
 
     constructor() {
         this.reset();
@@ -56,7 +47,7 @@ class Game {
         this.lines = 0;
         this.topOut = false;
         this.pieces = [];
-        this.highScore = this.getHighScore();
+        this.highScore = GameUtils.getHighScore();
         this.playfield = this.createPlayfield();
         this.activePiece = this.createPiece();
         this.nextPiece = this.createPiece();
@@ -65,10 +56,10 @@ class Game {
     createPlayfield() {
         const playfield = [];
 
-        for (let y = 0; y < APP_CONFIG.playField.rows; y++) {
+        for (let y = 0; y < ROWS; y++) {
             playfield[y] = [];
 
-            for (let x = 0; x < APP_CONFIG.playField.columns; x++) {
+            for (let x = 0; x < COLUMNS; x++) {
                 playfield[y][x] = 0;
             }
         }
@@ -80,61 +71,57 @@ class Game {
         const piece = {};
         let currentType;
         do {
-            const index = Math.floor(Math.random() * Game.NUMBER_SHAPES);
-            currentType = Game.TYPES[index];
-
-            if (currentType === 'I') {
-                piece.blocks = [
-                    [0, 0, 0, 0],
-                    [1, 1, 1, 1],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]
-                ];
-            } else if (currentType === 'J') {
-                piece.blocks = [
-                    [0, 0, 0],
-                    [2, 2, 2],
-                    [0, 0, 2]
-                ];
-            } else if (currentType === 'L') {
-                piece.blocks = [
-                    [0, 0, 0],
-                    [3, 3, 3],
-                    [3, 0, 0]
-                ];
-            } else if (currentType === 'O') {
-                piece.blocks = [
-                    [0, 0, 0, 0],
-                    [0, 4, 4, 0],
-                    [0, 4, 4, 0],
-                    [0, 0, 0, 0]
-                ];
-            } else if (currentType === 'S') {
-                piece.blocks = [
-                    [0, 0, 0],
-                    [0, 5, 5],
-                    [5, 5, 0]
-                ];
-            } else if (currentType === 'T') {
-                piece.blocks = [
-                    [0, 0, 0],
-                    [6, 6, 6],
-                    [0, 6, 0]
-                ];
-            } else if (currentType === 'Z') {
-                piece.blocks = [
-                    [0, 0, 0],
-                    [7, 7, 0],
-                    [0, 7, 7]
-                ];
-            } else {
-                throw new Error('Unknown type of figure');
-            }
+            const index = Math.floor(Math.random() * NUMBER_SHAPES);
+            currentType = TYPES[index];        
         } while (this.isRepeated(currentType));
 
+        if (currentType === 'I') {
+            piece.blocks = [
+                [0, 0, 0, 0],
+                [1, 1, 1, 1],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+            ];
+        } else if (currentType === 'J') {
+            piece.blocks = [
+                [0, 0, 0],
+                [2, 2, 2],
+                [0, 0, 2]
+            ];
+        } else if (currentType === 'L') {
+            piece.blocks = [
+                [0, 0, 0],
+                [3, 3, 3],
+                [3, 0, 0]
+            ];
+        } else if (currentType === 'O') {
+            piece.blocks = [
+                [0, 0, 0, 0],
+                [0, 4, 4, 0],
+                [0, 4, 4, 0],
+                [0, 0, 0, 0]
+            ];
+        } else if (currentType === 'S') {
+            piece.blocks = [
+                [0, 0, 0],
+                [0, 5, 5],
+                [5, 5, 0]
+            ];
+        } else if (currentType === 'T') {
+            piece.blocks = [
+                [0, 0, 0],
+                [6, 6, 6],
+                [0, 6, 0]
+            ];
+        } else if (currentType === 'Z') {
+            piece.blocks = [
+                [0, 0, 0],
+                [7, 7, 0],
+                [0, 7, 7]
+            ];
+        }
         piece.x = Math.floor((10 - piece.blocks[0].length) / 2);
         piece.y = -1;
-
         return piece;
     }
 
@@ -183,7 +170,7 @@ class Game {
         if (this.hasCollision()) {
             this.topOut = true;
             if (this.score > this.highScore) {
-                localStorage.setItem('highScore', this.score);
+                GameUtils.setHighScore(this.score);
             }
         }
     }
@@ -252,13 +239,12 @@ class Game {
     }
 
     clearLines() {
-        const { columns, rows } = APP_CONFIG.playField;
         let lines = [];
 
-        for (let y = rows - 1; y >= 0; y--) {
+        for (let y = ROWS - 1; y >= 0; y--) {
             let numberOfBlocks = 0;
 
-            for (let x = 0; x < columns; x++) {
+            for (let x = 0; x < COLUMNS; x++) {
                 if (this.playfield[y][x]) {
                     numberOfBlocks += 1;
                 }
@@ -266,16 +252,16 @@ class Game {
 
             if (numberOfBlocks === 0) {
                 break;
-            } else if (numberOfBlocks < columns) {
+            } else if (numberOfBlocks < COLUMNS) {
                 continue;
-            } else if (numberOfBlocks === columns) {
+            } else if (numberOfBlocks === COLUMNS) {
                 lines.unshift(y);
             }
         }
 
         for (let index of lines) {
             this.playfield.splice(index, 1);
-            this.playfield.unshift(this.getPlayfieldLine(columns, 0));
+            this.playfield.unshift(this.getPlayfieldLine(COLUMNS, 0));
         }
 
         this.updateScore(lines.length);
@@ -291,7 +277,7 @@ class Game {
 
     updateScore(clearLines) {
         if (clearLines > 0) {
-            this.score += Game.points[clearLines] * (this.level + 1);
+            this.score += POINTS[clearLines] * (this.level + 1);
             this.lines += clearLines;
         }
     }
@@ -299,20 +285,6 @@ class Game {
     updatePieces() {
         this.activePiece = this.nextPiece;
         this.nextPiece = this.createPiece();
-    }
-
-    getHighScore() {
-        let highScore;
-        try {
-            highScore = localStorage.getItem('highScore');
-        } catch (error) {
-            console.error(error.message);
-        }
-        if (/^\d+$/.test(highScore)) {
-            return Number(highScore);
-        } else {
-            return 0;
-        }
     }
 }
 

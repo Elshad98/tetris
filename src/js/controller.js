@@ -1,24 +1,12 @@
+import { KEYS, MAX_UPDATE_INTERVAL, MIN_UPDATE_INTERVAL } from './constants';
+
 class Controller {
-
-    static KEYS = {
-        RIGHT: 39,
-        LEFT: 37,
-        UP: 38,
-        DOWN: 40,
-        ENTER: 13,
-    };
-
-    static MAX_UPDATE_INTERVAL = 800;
-    static MIN_UPDATE_INTERVAL = 200;
 
     constructor(game, view) {
         this.game = game;
         this.view = view;
         this.intervalId = null;
         this.isPlaying = false;
-        this.xDown = null;
-        this.yDown = null;
-        this.interval = null;
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
@@ -52,8 +40,8 @@ class Controller {
 
     startTimer() {
         if (!this.intervalId) {
-            const speed = Controller.MAX_UPDATE_INTERVAL - (this.game.getState().level * 100);
-            const ms = (speed >= Controller.MIN_UPDATE_INTERVAL) ? speed : Controller.MIN_UPDATE_INTERVAL;
+            const speed = MAX_UPDATE_INTERVAL - (this.game.getState().level * 100);
+            const ms = (speed >= MIN_UPDATE_INTERVAL) ? speed : MIN_UPDATE_INTERVAL;
 
             this.intervalId = setInterval(() => {
                 this.update();
@@ -111,39 +99,25 @@ class Controller {
         }
     }
 
-    handleMouseDown() {
-        if (this.isPlaying && !this.interval) {
-            this.interval = setInterval(() => {
-                this.onDown();
-            }, 100);
-        }
-    }
-
-    handleMouseUp() {
-        clearInterval(this.interval);
-        this.interval = null;
-        this.startTimer();
-    }
-
     handleKeyDown({ keyCode }) {
-        if (keyCode === Controller.KEYS.ENTER) {
+        if (keyCode === KEYS.ENTER) {
             this.changeView();
         }
         if (this.isPlaying) {
-            if (keyCode === Controller.KEYS.LEFT) {
+            if (keyCode === KEYS.LEFT) {
                 this.onLeft();
-            } else if (keyCode === Controller.KEYS.UP) {
+            } else if (keyCode === KEYS.UP) {
                 this.onUp();
-            } else if (keyCode === Controller.KEYS.RIGHT) {
+            } else if (keyCode === KEYS.RIGHT) {
                 this.onRight();
-            } else if (keyCode === Controller.KEYS.DOWN) {
+            } else if (keyCode === KEYS.DOWN) {
                 this.onDown();
             }
         }
     }
 
     handleKeyUp({ keyCode }) {
-        if ((keyCode === Controller.KEYS.DOWN) && this.isPlaying) {
+        if ((keyCode === KEYS.DOWN) && this.isPlaying) {
             this.startTimer();
         }
     }

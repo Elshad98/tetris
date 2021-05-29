@@ -1,14 +1,6 @@
-class View {
+import { COLORS } from './constants';
 
-    static colors = {
-        '1': '#ffc90d',
-        '2': '#ff7f26',
-        '3': '#eb2325',
-        '4': '#23b14d',
-        '5': '#3f46cb',
-        '6': '#a349a3',
-        '7': '#01a2e8'
-    }
+class View {
 
     constructor(element, width, height, rows, columns) {
         this.element = element;
@@ -86,7 +78,7 @@ class View {
                         this.blockWidth,
                         this.blockHeight,
                         5,
-                        View.colors[block]);
+                        COLORS[block]);
                 }
             }
         }
@@ -135,7 +127,7 @@ class View {
                         this.blockWidth * 0.65,
                         this.blockHeight * 0.65,
                         5,
-                        View.colors[block]
+                        COLORS[block]
                     );
                 }
             }
