@@ -52,9 +52,9 @@ class View {
     renderEndScreen({ score }) {
         this.clearScreen();
 
-        this.renderText('white', '18px', 'center', 'middle', 'GAME OVER', this.width / 2, this.height / 2 - 48);
+        this.renderText('white', '18px', 'center', 'middle', 'GAME OVER', (this.width / 2), (this.height / 2) - 48);
         this.renderText('white', '18px', 'center', 'middle', `Score: ${score}`, this.width / 2, this.height / 2);
-        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Restart', this.width / 2, this.height / 2 + 48);
+        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Restart', this.width / 2, (this.height / 2) + 48);
     }
 
     renderText(color, size, align, baseLine, text, x, y) {
@@ -101,7 +101,7 @@ class View {
             this.context.moveTo(position * this.blockWidth, 0);
             this.context.lineTo(position * this.blockWidth, this.playfieldInnerHeight);
         }
-        this.context.strokeStyle = "#696f75";
+        this.context.strokeStyle = '#696f75';
         this.context.lineWidth = .35;
         this.context.stroke();
         this.context.closePath();
@@ -111,10 +111,8 @@ class View {
         this.renderText('white', '14px', 'start', 'top', `Score: ${score}`, this.panelX, this.panelY + 8);
         this.renderText('white', '14px', 'start', 'top', `Level: ${level}`, this.panelX, this.panelY + 32);
         this.renderText('white', '14px', 'start', 'top', `Lines: ${lines}`, this.panelX, this.panelY + 56);
-        this.renderText('white', '14px', 'start', 'top', `Next:`, this.panelX + 0, this.panelY + 104);
-        if (highScore > 0) {
-            this.renderText('white', '14px', 'start', 'top', `HI: ${highScore}`, this.panelX, this.panelHeight - 20);
-        }
+        this.renderText('white', '14px', 'start', 'top', `Next:`, this.panelX, this.panelY + 104);
+        this.renderText('white', '14px', 'start', 'top', `HI: ${highScore}`, this.panelX, this.panelHeight - 20);
 
         for (let y = 0; y < nextPiece.blocks.length; y++) {
             for (let x = 0; x < nextPiece.blocks[y].length; x++) {
