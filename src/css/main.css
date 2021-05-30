@@ -1,5 +1,4 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -38,7 +37,7 @@ body {
 .game {
     width: 480px;
     padding: 31px 0 31px;
-    border: solid #000;
+    border: solid #23272a;
     border-width: 0 10px 10px;
     margin: 0 auto;
     position: relative;
@@ -116,7 +115,7 @@ body {
     height: 10px;
     float: left;
     overflow: hidden;
-    background: #000;
+    background: #23272a;
     margin-right: 10px;
 }
 
@@ -279,6 +278,11 @@ button {
     box-shadow: 0 1px 2px 0 rgb(34, 36, 38, .15), inset 0 -10px 6px 0 rgb(34, 36, 38, .35);
     border: 1px solid rgba(34, 36, 38, .3);
     border-radius: 50%;
+    transition: 0.1s ease-out;
+}
+
+button:active {
+    box-shadow: 0 1px 2px 0 rgb(34, 36, 38, .15), inset 0 10px 6px 0 rgb(34, 36, 38, .35);
 }
 
 .clear {

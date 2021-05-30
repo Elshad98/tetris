@@ -72,7 +72,7 @@ class Game {
         let currentType;
         do {
             const index = Math.floor(Math.random() * NUMBER_SHAPES);
-            currentType = TYPES[index];        
+            currentType = TYPES[index];
         } while (this.isRepeated(currentType));
 
         if (currentType === 'I') {
@@ -138,6 +138,25 @@ class Game {
         return result;
     }
 
+    dropDown() {
+        if (this.topOut) {
+            return;
+        }
+
+        for (; ;) {
+            this.activePiece.y += 1;
+            if (this.hasCollision()) {
+                this.activePiece.y -= 1;
+                this.lockPiece();
+                this.clearLines();
+                this.updatePieces();
+                break;
+            }
+        }
+
+        this.checkCollision();
+    }
+
     movePieceLeft() {
         this.activePiece.x -= 1;
 
@@ -167,6 +186,10 @@ class Game {
             this.updatePieces();
         }
 
+        this.checkCollision();
+    }
+
+    checkCollision() {
         if (this.hasCollision()) {
             this.topOut = true;
             if (this.score > this.highScore) {

@@ -13,6 +13,8 @@ const POINTS = {
 
 const TYPES = 'IJLOSTZ';
 
+const DEFAULT_INTERVAL = 60;
+
 const MAX_UPDATE_INTERVAL = 800;
 const MIN_UPDATE_INTERVAL = 200;
 
@@ -23,6 +25,8 @@ const KEYS = {
     LEFT: 37,
     UP: 38,
     DOWN: 40,
+    R: 82,
+    P: 80,
     ENTER: 13,
 }
 
@@ -43,6 +47,7 @@ export {
     ROWS,
     POINTS,
     TYPES,
+    DEFAULT_INTERVAL,
     MAX_UPDATE_INTERVAL,
     MIN_UPDATE_INTERVAL,
     NUMBER_SHAPES,

@@ -40,13 +40,13 @@ class View {
     }
 
     renderStartScreen() {
-        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Start', this.width / 2, this.height / 2);
+        this.renderText('white', '18px', 'center', 'middle', 'Press "R" to Start', this.width / 2, this.height / 2);
     }
 
     renderPauseScreen() {
         this.context.fillStyle = 'rgba(0, 0, 0, 0.75)';
         this.context.fillRect(0, 0, this.width, this.height);
-        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Resume', this.width / 2, this.height / 2);
+        this.renderText('white', '18px', 'center', 'middle', 'Press "P" to Resume', this.width / 2, this.height / 2);
     }
 
     renderEndScreen({ score }) {
@@ -54,7 +54,7 @@ class View {
 
         this.renderText('white', '18px', 'center', 'middle', 'GAME OVER', (this.width / 2), (this.height / 2) - 48);
         this.renderText('white', '18px', 'center', 'middle', `Score: ${score}`, this.width / 2, this.height / 2);
-        this.renderText('white', '18px', 'center', 'middle', 'Press ENTER to Restart', this.width / 2, (this.height / 2) + 48);
+        this.renderText('white', '18px', 'center', 'middle', 'Press "R" to Restart', this.width / 2, (this.height / 2) + 48);
     }
 
     renderText(color, size, align, baseLine, text, x, y) {

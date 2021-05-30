@@ -11,5 +11,13 @@ window.addEventListener('load', function() {
 
     const game = new Game();
     const view = new View(element, WIDTH, HEIGHT, ROWS, COLUMNS);
-    const controller = new Controller(game, view);
+    const controller = new Controller(game, view, {
+        left: document.querySelector('.left-button'),
+        drop: document.querySelector('.drop-button'),
+        down: document.querySelector('.down-button'),
+        right: document.querySelector('.right-button'),
+        pause: document.querySelector('.pause-button'),
+        reset: document.querySelector('.reset-button'),
+        rotation: document.querySelector('.rotation-button')
+    });
 });
