@@ -78,7 +78,8 @@ class View {
                         this.blockWidth,
                         this.blockHeight,
                         5,
-                        COLORS[block]);
+                        COLORS[block]
+                    );
                 }
             }
         }

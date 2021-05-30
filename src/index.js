@@ -7,7 +7,7 @@ import 'reset-css';
 import './css/main.css';
 
 window.addEventListener('load', function() {
-    const element = document.getElementById('root');
+    const element = document.querySelector('.game-screen');
 
     const game = new Game();
     const view = new View(element, WIDTH, HEIGHT, ROWS, COLUMNS);

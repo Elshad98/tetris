@@ -1,22 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tetris</title>
+    <title>T E T R I S</title>
 </head>
+
 <body>
     <div id="root">
-        <h1>
-            <span class="red">T</span>
-            <span class="orange">E</span>
-            <span class="yellow">T</span>
-            <span class="green">R</span>
-            <span class="blue">I</span>
-            <span class="purple">S</span>
-        </h1>
+        <div class="game">
+            <div>
+                <div class="container-blocks">
+                    <span class="left-block first-left-block"></span>
+                    <span class="left-block"></span>
+                    <span class="left-block"></span>
+                    <span class="left-block"></span>
+                    <span class="left-block"></span>
+                    <span class="left-block"></span>
+                    <span class="right-block first-right-block"></span>
+                    <span class="right-block"></span>
+                    <span class="right-block"></span>
+                    <span class="right-block"></span>
+                    <span class="right-block"></span>
+                </div>
+                <h1 class="title">T E T R I S</h1>
+                <div class="panel panel-left">
+                    <span class="blue"></span>
+                    <div class="clear"></div>
+                    <span class="blue"></span>
+                    <span class="blue"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="blue"></span>
+                    <div class="space"></div>
+                    <span class="tranparent"></span>
+                    <span class="light-blue"></span>
+                    <div class="clear"></div>
+                    <span class="light-blue"></span>
+                    <span class="light-blue"></span>
+                    <div class="clear"></div>
+                    <span class="light-blue"></span>
+                    <div class="space"></div>
+                    <span class="green"></span>
+                    <span class="green"></span>
+                    <span class="green"></span>
+                    <span class="green"></span>
+                    <div class="space"></div>
+                    <span class="purple"></span>
+                    <div class="clear"></div>
+                    <span class="purple"></span>
+                    <span class="purple"></span>
+                    <div class="clear"></div>
+                    <span class="purple"></span>
+                    <div class="space"></div>
+                    <span class="orange"></span>
+                    <span class="orange"></span>
+                    <div class="clear"></div>
+                    <span class="orange"></span>
+                    <div class="clear"></div>
+                    <span class="orange"></span>
+                    <div class="space"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                </div>
+                <div class="panel panel-right">
+                    <span class="blue"></span>
+                    <div class="clear"></div>
+                    <span class="blue"></span>
+                    <span class="blue"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="blue"></span>
+                    <div class="space"></div>
+                    <span class="tranparent"></span>
+                    <span class="light-blue"></span>
+                    <div class="clear"></div>
+                    <span class="light-blue"></span>
+                    <span class="light-blue"></span>
+                    <div class="clear"></div>
+                    <span class="light-blue"></span>
+                    <div class="space"></div>
+                    <span class="green"></span>
+                    <span class="green"></span>
+                    <span class="green"></span>
+                    <span class="green"></span>
+                    <div class="space"></div>
+                    <span class="purple"></span>
+                    <div class="clear"></div>
+                    <span class="purple"></span>
+                    <span class="purple"></span>
+                    <div class="clear"></div>
+                    <span class="purple"></span>
+                    <div class="space"></div>
+                    <span class="orange"></span>
+                    <span class="orange"></span>
+                    <div class="clear"></div>
+                    <span class="orange"></span>
+                    <div class="clear"></div>
+                    <span class="orange"></span>
+                    <div class="space"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                    <div class="clear"></div>
+                    <span class="tranparent"></span>
+                    <span class="yellow"></span>
+                </div>
+            </div>
+            <div class="game-screen"></div>
+        </div>
+        <div class="game-controls">
+            <div class="game-controls-button container-pause-button">
+                <button class="pause-button green"></button>
+                <span>Pause(P)</span>
+            </div>
+            <div class="game-controls-button container-reset-button">
+                <button class="reset-button red"></button>
+                <span>Reset(R)</span>
+            </div>
+            <div class="game-controls-button container-drop-button">
+                <button class="drop-button yellow"></button>
+                <span>Drop(SPACE)</span>
+            </div>
+            <div class="game-controls-button container-rotation-button">
+                <button class="rotation-button yellow"></button>
+                <span class="arrow arrow-up"></span>
+                <span class="rotation-text">Rotationspan</span>
+            </div>
+            <div class="game-controls-button container-right-button">
+                <button class="right-button yellow"></button>
+                <span class="arrow arrow-right"></span>
+                <span>Right</span>
+            </div>
+            <div class="game-controls-button container-down-button">
+                <button class="down-button yellow"></button>
+                <span class="arrow arrow-down"></span>
+                <span>Down</span>
+            </div>
+            <div class="game-controls-button container-left-button">
+                <button class="left-button yellow"></button>
+                <span class="arrow arrow-left"></span>
+                <span>Left</span>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

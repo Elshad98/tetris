@@ -1,17 +1,236 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
 @font-face {
     font-family: 'Press Start 2P';
     src: local('Press Start 2P'), url(../fonts/PressStart2P-Regular.ttf);
 }
 
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto'), url(../fonts/Roboto-Regular.ttf);
+}
+
 body {
-    font-family: 'Press Start 2P';
-    background-color: #292c31;
+    font-family: 'Roboto';
+    background-color: #7289da;
 }
 
 #root {
-    width: 100%;
-    padding-top: 4rem;
+    width: 640px;
+    padding-top: 42px;
+    box-shadow: inset 0 0 10px #fff;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -480px 0 0 -320px;
+    background: #a8a9a4;
+}
+
+.game {
+    width: 480px;
+    padding: 31px 0 31px;
+    border: solid #000;
+    border-width: 0 10px 10px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.game-screen {
+    width: 385px;
+    height: 490px;
+    border: 5px solid #696f75;
+    margin: 0 auto;
+    position: relative;
+}
+
+.game-controls {
+    width: 580px;
+    height: 330px;
+    margin: 20px auto 0;
+    position: relative;
+}
+
+.game-controls-button {
     text-align: center;
+    color: #111;
+    position: absolute;
+    white-space: nowrap;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.container-pause-button {
+    position: absolute;
+    top: 0px;
+    left: 16px;
+}
+
+.container-reset-button {
+    position: absolute;
+    top: 0px;
+    left: 106px;
+}
+
+.container-rotation-button {
+    position: absolute;
+    top: 0px;
+    left: 374px;
+}
+
+.container-drop-button {
+    position: absolute;
+    top: 100px;
+    left: 30px;
+}
+
+.title {
+    font-size: 24px;
+    position: absolute;
+    left: 38%;
+    top: -8px;
+    max-width: 225px;
+    text-align: center;
+}
+
+.container-blocks {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 10px;
+    top: 0;
+    overflow: hidden;
+}
+
+.container-blocks .left-block, .container-blocks .right-block {
+    display: block;
+    width: 10px;
+    height: 10px;
+    float: left;
+    overflow: hidden;
+    background: #000;
+    margin-right: 10px;
+}
+
+.container-blocks .right-block {
+    float: right;
+}
+
+.left-block.first-left-block, .right-block.first-right-block {
+    width: 40px;
+}
+
+.right-block.first-right-block {
+    margin-right: 0;
+}
+
+.arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border: 8px solid;
+    border-color: transparent transparent #23272a;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -12px 0 0 -8px;
+}
+
+.arrow-up {
+    transform: translate(0px, 63px) scale(1, 2);
+}
+
+.arrow-down {
+    transform: translate(0px, -71px) rotate(180deg) scale(1, 2);
+}
+
+.arrow-right {
+    transform: translate(-60px, -12px) rotate( 90deg) scale(1, 2);
+}
+
+.arrow-left {
+    transform: translate(60px, -12px) rotate(270deg) scale(1, 2);
+}
+
+.container-left-button {
+    position: absolute;
+    top: 90px;
+    left: 284px;
+}
+
+.container-right-button {
+    position: absolute;
+    top: 90px;
+    left: 464px;
+}
+
+.container-down-button {
+    position: absolute;
+    top: 180px;
+    left: 374px;
+}
+
+.pause-button, .reset-button {
+    width: 52px;
+    height: 52px;
+}
+
+.drop-button {
+    width: 160px;
+    height: 160px;
+}
+
+.rotation-button, .left-button, .right-button, .down-button {
+    width: 100px;
+    height: 100px;
+}
+
+.rotation-text {
+    position: absolute;
+    top: 5px;
+    left: 102px;
+}
+
+.panel {
+    position: absolute;
+    right: -70px;
+    top: 20px;
+    width: 44px;
+}
+
+.panel-left {
+    right: auto;
+    left: -70px;
+}
+
+.panel span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f9fafb;
+    border-radius: 5px;
+    float: left;
+}
+
+.panel .tranparent {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    float: left;
+    border: none;
+}
+
+.panel .space {
+    height: 30px;
+    clear: both;
 }
 
 h1 {
@@ -22,38 +241,59 @@ h1 span {
     margin: 0 -8px;
 }
 
-#root canvas {
-    display: block;
-    margin: 0 auto;
-}
-
 .red {
-    color: #eb2325;
+    background: #eb2325;
 }
 
 .orange {
-    color: #ff7f26;
+    background: #ff7f26;
 }
 
 .yellow {
-    color: #ffc90d;
+    background: #ffc90d;
 }
 
 .green {
-    color: #23b14d;
+    background: #23b14d;
+}
+
+.light-blue {
+    background: #01a2e8;
 }
 
 .blue {
-    color: #01a2e8;
+    background: #3f46cb;
 }
 
 .purple {
-    color: #a349a3;
+    background: #a349a3;
 }
 
-#root canvas {
+.white {
+    background: #f9fafb;
+}
+
+button {
     display: block;
-    margin: 25px auto 0;
-    border: 4px solid #696f75;
+    position: relative;
+    box-shadow: 0 1px 2px 0 rgb(34, 36, 38, .15), inset 0 -10px 6px 0 rgb(34, 36, 38, .35);
+    border: 1px solid rgba(34, 36, 38, .3);
+    border-radius: 50%;
+}
+
+.clear {
+    clear: both;
+}
+
+button:active, button:focus {
+    outline: none;
+}
+
+.game-screen canvas {
+    display: block;
+    transform: scale(.75);
     background-color: #36393e;
+    position: absolute;
+    top: -80px;
+    left: -62px;
 }
