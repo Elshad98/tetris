@@ -24,7 +24,6 @@ body {
 
 #root {
     width: 640px;
-    padding-top: 42px;
     box-shadow: inset 0 0 10px #fff;
     border-radius: 20px;
     position: absolute;
@@ -295,7 +294,7 @@ button:active, button:focus {
 
 .game-screen canvas {
     display: block;
-    transform: scale(.75);
+    transform: scale(.751);
     background-color: #36393e;
     position: absolute;
     top: -80px;
