@@ -10,11 +10,11 @@ class Controller {
         this.isPlaying = false;
         this.interval = null;
 
-        this.addEventListener();
+        this.addEventListeners();
         this.view.renderStartScreen();
     }
 
-    addEventListener() {
+    addEventListeners() {
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
         this.buttons.left.addEventListener('mouseup', this.stopMove.bind(this));
@@ -168,7 +168,7 @@ class Controller {
         if (keyCode === KEYS.R) {
             this.reset();
         } else if (keyCode === KEYS.P) {
-            this.pause();
+            this.togglePlayPause();
         } else if (keyCode === KEYS.LEFT) {
             this.onLeft();
         } else if (keyCode === KEYS.UP) {

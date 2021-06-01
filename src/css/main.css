@@ -71,25 +71,25 @@ body {
 .container-pause-button {
     position: absolute;
     top: 0px;
-    left: 16px;
+    right: 120px;
 }
 
 .container-reset-button {
     position: absolute;
     top: 0px;
-    left: 106px;
+    right: 28px;
 }
 
 .container-rotation-button {
     position: absolute;
     top: 0px;
-    left: 374px;
+    right: 374px;
 }
 
 .container-drop-button {
     position: absolute;
     top: 100px;
-    left: 30px;
+    right: 30px;
 }
 
 .title {
@@ -153,29 +153,29 @@ body {
 }
 
 .arrow-right {
-    transform: translate(-60px, -12px) rotate( 90deg) scale(1, 2);
+    transform: translate(120px,-12px) rotate(90deg) scaleY(2);
 }
 
 .arrow-left {
-    transform: translate(60px, -12px) rotate(270deg) scale(1, 2);
+    transform: translate(-120px, -12px) rotate(270deg) scale(1, 2);
 }
 
 .container-left-button {
     position: absolute;
     top: 90px;
-    left: 284px;
+    right: 284px;
 }
 
 .container-right-button {
     position: absolute;
     top: 90px;
-    left: 464px;
+    right: 464px;
 }
 
 .container-down-button {
     position: absolute;
     top: 180px;
-    left: 374px;
+    right: 374px;
 }
 
 .pause-button, .reset-button {
@@ -196,7 +196,7 @@ body {
 .rotation-text {
     position: absolute;
     top: 5px;
-    left: 102px;
+    right: 102px;
 }
 
 .panel {
