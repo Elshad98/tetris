@@ -47,7 +47,9 @@ body {
     height: 490px;
     border: 5px solid #696f75;
     margin: 0 auto;
+    overflow: hidden;
     position: relative;
+    background-color: #36393e;
 }
 
 .game-controls {
@@ -278,6 +280,7 @@ button {
     border: 1px solid rgba(34, 36, 38, .3);
     border-radius: 50%;
     transition: 0.1s ease-out;
+    cursor: pointer;
 }
 
 button:active {
@@ -299,4 +302,8 @@ button:active, button:focus {
     position: absolute;
     top: -80px;
     left: -62px;
+}
+
+.unselectable {
+    user-select: none;
 }

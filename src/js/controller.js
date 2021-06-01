@@ -21,7 +21,7 @@ class Controller {
         this.buttons.left.addEventListener('mousedown', this.startMoveLeft.bind(this));
         this.buttons.right.addEventListener('mouseup', this.stopMove.bind(this));
         this.buttons.right.addEventListener('mousedown', this.startMoveRight.bind(this));
-        this.buttons.pause.addEventListener('mousedown', this.pause.bind(this));
+        this.buttons.pause.addEventListener('mousedown', this.togglePlayPause.bind(this));
         this.buttons.reset.addEventListener('mousedown', this.reset.bind(this));
         this.buttons.rotation.addEventListener('mouseup', this.stopMove.bind(this));
         this.buttons.rotation.addEventListener('mousedown', this.startRotation.bind(this));
@@ -156,10 +156,8 @@ class Controller {
         clearInterval(this.interval);
     }
 
-    changeView() {
-        if (this.game.getState().isGameOver) {
-            this.reset();
-        } else if (this.isPlaying) {
+    togglePlayPause() {
+        if (this.isPlaying) {
             this.pause();
         } else {
             this.play();
@@ -167,9 +165,7 @@ class Controller {
     }
 
     handleKeyDown({ keyCode }) {
-        if (keyCode === KEYS.ENTER) {
-            this.changeView();
-        } else if (keyCode === KEYS.R) {
+        if (keyCode === KEYS.R) {
             this.reset();
         } else if (keyCode === KEYS.P) {
             this.pause();
