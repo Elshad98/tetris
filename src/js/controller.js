@@ -15,6 +15,7 @@ class Controller {
     }
 
     addEventListeners() {
+        window.addEventListener('blur', this.pause.bind(this));
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
         this.buttons.left.addEventListener('mouseup', this.stopMove.bind(this));
