@@ -9,6 +9,8 @@ class Controller {
         this.intervalId = null;
         this.isPlaying = false;
         this.interval = null;
+        this.isMouseDownEvent = false;
+        this.isTouchStartEvent = false;
 
         this.addEventListeners();
         this.view.renderStartScreen();
@@ -16,19 +18,49 @@ class Controller {
 
     addEventListeners() {
         window.addEventListener('blur', this.pause.bind(this));
+        window.addEventListener('contextmenu', this.stopMove.bind(this));
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
-        this.buttons.left.addEventListener('mouseup', this.stopMove.bind(this));
-        this.buttons.left.addEventListener('mousedown', this.startMoveLeft.bind(this));
-        this.buttons.right.addEventListener('mouseup', this.stopMove.bind(this));
-        this.buttons.right.addEventListener('mousedown', this.startMoveRight.bind(this));
-        this.buttons.pause.addEventListener('mousedown', this.togglePlayPause.bind(this));
-        this.buttons.reset.addEventListener('mousedown', this.reset.bind(this));
-        this.buttons.rotation.addEventListener('mouseup', this.stopMove.bind(this));
-        this.buttons.rotation.addEventListener('mousedown', this.startRotation.bind(this));
-        this.buttons.down.addEventListener('mouseup', this.endMoveDown.bind(this));
-        this.buttons.down.addEventListener('mousedown', this.startMoveDown.bind(this));
-        this.buttons.drop.addEventListener('mousedown', this.startDrop.bind(this));
+        this.down(this.buttons.left, this.startMoveLeft.bind(this));
+        this.up(this.buttons.left, this.stopMove.bind(this));
+        this.down(this.buttons.right, this.startMoveRight.bind(this));
+        this.up(this.buttons.right, this.stopMove.bind(this));
+        this.down(this.buttons.pause, this.togglePlayPause.bind(this));
+        this.down(this.buttons.reset, this.reset.bind(this));
+        this.down(this.buttons.rotation, this.startRotation.bind(this));
+        this.up(this.buttons.rotation, this.stopMove.bind(this));
+        this.down(this.buttons.down, this.startMoveDown.bind(this));
+        this.up(this.buttons.down, this.endMoveDown.bind(this));
+        this.down(this.buttons.drop, this.startDrop.bind(this));
+    }
+
+    down(button, callback) {
+        button.addEventListener('mousedown', () => {
+            if (this.isTouchStartEvent) {
+                this.isTouchStartEvent = false;
+                return;
+            }
+            callback();
+            this.isMouseDownEvent = true;
+        }, true);
+
+        button.addEventListener('touchstart', () => {
+            this.isTouchStartEvent = true;
+            callback();
+        }, true);
+    }
+
+    up(button, callback) {
+        button.addEventListener('mouseup', () => {
+            if (this.isTouchStartEvent) {
+                this.isTouchStartEvent = false;
+                return;
+            }
+            callback();
+            this.isMouseDownEvent = true;
+        }, true);
+
+        button.addEventListener('touchend', callback, true);
     }
 
     update() {
@@ -45,6 +77,7 @@ class Controller {
     pause() {
         if (typeof this.intervalId === 'number') {
             this.isPlaying = false;
+            this.stopMove();
             this.stopTimer();
             this.updateView();
         }
@@ -94,9 +127,7 @@ class Controller {
     }
 
     startMoveLeft() {
-        this.interval = setInterval(() => {
-            this.onLeft();
-        }, DEFAULT_INTERVAL);
+        this.startMove(this.onLeft.bind(this));
     }
 
     onRight() {
@@ -107,9 +138,7 @@ class Controller {
     }
 
     startMoveRight() {
-        this.interval = setInterval(() => {
-            this.onRight();
-        }, DEFAULT_INTERVAL);
+        this.startMove(this.onRight.bind(this));
     }
 
     onUp() {
@@ -120,8 +149,13 @@ class Controller {
     }
 
     startRotation() {
+        this.startMove(this.onUp.bind(this));
+    }
+
+    startMove(callback) {
+        callback();
         this.interval = setInterval(() => {
-            this.onUp();
+            callback();
         }, DEFAULT_INTERVAL);
     }
 
@@ -134,9 +168,7 @@ class Controller {
     }
 
     startMoveDown() {
-        this.interval = setInterval(() => {
-            this.onDown();
-        }, DEFAULT_INTERVAL);
+        this.startMove(this.onDown.bind(this));
     }
 
     endMoveDown() {
