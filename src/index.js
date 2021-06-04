@@ -6,7 +6,7 @@ import { WIDTH, HEIGHT, COLUMNS, ROWS, } from './js/constants';
 import 'reset-css';
 import './css/main.css';
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
     const rootEl = document.getElementById('root');
     const element = document.querySelector('.game-screen');
     const gameControls = document.querySelector('.game-controls');
@@ -23,7 +23,7 @@ window.addEventListener('load', function() {
         rotation: document.querySelector('.rotation-button')
     });
 
-    const transform = (function() {
+    const transform = (() => {
         const trans = ['transform', 'webkitTransform', 'msTransform', 'mozTransform', 'oTransform'];
         const body = document.body;
         return trans.filter((e) => body.style[e] !== undefined)[0];

@@ -21,20 +21,20 @@ class Controller {
         window.addEventListener('contextmenu', this.stopMove.bind(this));
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
-        this.down(this.buttons.left, this.startMoveLeft.bind(this));
-        this.up(this.buttons.left, this.stopMove.bind(this));
-        this.down(this.buttons.right, this.startMoveRight.bind(this));
-        this.up(this.buttons.right, this.stopMove.bind(this));
-        this.down(this.buttons.pause, this.togglePlayPause.bind(this));
-        this.down(this.buttons.reset, this.reset.bind(this));
-        this.down(this.buttons.rotation, this.startRotation.bind(this));
-        this.up(this.buttons.rotation, this.stopMove.bind(this));
-        this.down(this.buttons.down, this.startMoveDown.bind(this));
-        this.up(this.buttons.down, this.endMoveDown.bind(this));
-        this.down(this.buttons.drop, this.startDrop.bind(this));
+        this.onMouseDown(this.buttons.left, this.startMoveLeft.bind(this));
+        this.onMouseUp(this.buttons.left, this.stopMove.bind(this));
+        this.onMouseDown(this.buttons.right, this.startMoveRight.bind(this));
+        this.onMouseUp(this.buttons.right, this.stopMove.bind(this));
+        this.onMouseDown(this.buttons.pause, this.togglePlayPause.bind(this));
+        this.onMouseDown(this.buttons.reset, this.reset.bind(this));
+        this.onMouseDown(this.buttons.rotation, this.startRotation.bind(this));
+        this.onMouseUp(this.buttons.rotation, this.stopMove.bind(this));
+        this.onMouseDown(this.buttons.down, this.startMoveDown.bind(this));
+        this.onMouseUp(this.buttons.down, this.endMoveDown.bind(this));
+        this.onMouseDown(this.buttons.drop, this.startDrop.bind(this));
     }
 
-    down(button, callback) {
+    onMouseDown(button, callback) {
         button.addEventListener('mousedown', () => {
             if (this.isTouchStartEvent) {
                 this.isTouchStartEvent = false;
@@ -50,7 +50,7 @@ class Controller {
         }, true);
     }
 
-    up(button, callback) {
+    onMouseUp(button, callback) {
         button.addEventListener('mouseup', () => {
             if (this.isTouchStartEvent) {
                 this.isTouchStartEvent = false;
@@ -210,14 +210,14 @@ class Controller {
             this.onRight();
         } else if (keyCode === KEYS.DOWN) {
             this.onDown();
+        } else if (keyCode === KEYS.SPACE) {
+            this.startDrop();
         }
     }
 
     handleKeyUp({ keyCode }) {
         if (keyCode === KEYS.DOWN) {
             this.endMoveDown();
-        } else if (keyCode === KEYS.UP || keyCode === KEYS.LEFT || keyCode === KEYS.RIGHT) {
-            this.stopMove();
         }
     }
 }

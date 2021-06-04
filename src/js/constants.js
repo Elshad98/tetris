@@ -28,6 +28,7 @@ const KEYS = {
     R: 82,
     P: 80,
     ENTER: 13,
+    SPACE: 32
 }
 
 const COLORS = {
