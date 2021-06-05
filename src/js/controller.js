@@ -18,9 +18,34 @@ class Controller {
 
     addEventListeners() {
         window.addEventListener('blur', this.pause.bind(this));
-        window.addEventListener('contextmenu', this.stopMove.bind(this));
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
+        window.addEventListener('contextmenu',  (evt) => {
+            if (evt.preventDefault) {
+                evt.preventDefault();
+            }
+        });
+        document.addEventListener('touchstart', (evt) => {
+            if (evt.preventDefault) {
+                evt.preventDefault();
+            }
+        }, true);
+        document.addEventListener('touchend', (evt) => {
+            if (evt.preventDefault) {
+                evt.preventDefault();
+            }
+        }, true);
+        document.addEventListener('gesturestart', (evt) => {
+            if (evt.preventDefault) {
+                event.preventDefault();
+            }
+        });
+
+        document.addEventListener('mousedown', (evt) => {
+            if (evt.preventDefault) {
+                evt.preventDefault();
+            }
+        }, true);
         this.onMouseDown(this.buttons.left, this.startMoveLeft.bind(this));
         this.onMouseUp(this.buttons.left, this.stopMove.bind(this));
         this.onMouseDown(this.buttons.right, this.startMoveRight.bind(this));

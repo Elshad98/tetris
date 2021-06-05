@@ -77,25 +77,25 @@ body {
     font-size: 16px;
 }
 
-.container-pause-button {
+.game-pause-button {
     position: absolute;
     top: 0px;
     right: 120px;
 }
 
-.container-reset-button {
+.game-reset-button {
     position: absolute;
     top: 0px;
     right: 28px;
 }
 
-.container-rotation-button {
+.game-rotation-button {
     position: absolute;
     top: 0px;
     right: 374px;
 }
 
-.container-drop-button {
+.game-drop-button {
     position: absolute;
     top: 100px;
     right: 30px;
@@ -133,11 +133,11 @@ body {
     float: right;
 }
 
-.left-block.first-left-block, .right-block.first-right-block {
+.left-block.main-left-block, .right-block.main-right-block {
     width: 40px;
 }
 
-.right-block.first-right-block {
+.right-block.main-right-block {
     margin-right: 0;
 }
 
@@ -162,26 +162,26 @@ body {
 }
 
 .arrow-right {
-    transform: translate(-120px, -12px) rotate(270deg) scale(1, 2);
+    transform: translate(-60px,-12px) rotate(90deg) scaleY(2);
 }
 
 .arrow-left {
-    transform: translate(120px,-12px) rotate(90deg) scaleY(2);
+    transform: translate(60px, -12px) rotate(270deg) scale(1, 2);
 }
 
-.container-left-button {
+.game-left-button {
     position: absolute;
     top: 90px;
     right: 464px;
 }
 
-.container-right-button {
+.game-right-button {
     position: absolute;
     top: 90px;
     right: 284px;
 }
 
-.container-down-button {
+.game-down-button {
     position: absolute;
     top: 180px;
     right: 374px;
