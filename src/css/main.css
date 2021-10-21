@@ -45,19 +45,20 @@ body {
 .game {
     width: 480px;
     padding: 31px 0 31px;
-    border: solid #23272a;
+    border: solid #4f545c;
     border-width: 0 10px 10px;
     margin: 0 auto;
     position: relative;
 }
 
 .game-screen {
+    margin: 0 auto;
+    position: relative;
     width: 385px;
     height: 490px;
-    border: 5px solid #696f75;
-    margin: 0 auto;
     overflow: hidden;
-    position: relative;
+    border: 5px solid;
+    border-color: #72767d #a9a8a8 #d5d5d5 #a9a9a9;
     background-color: #36393e;
 }
 
@@ -110,7 +111,7 @@ body {
     text-align: center;
 }
 
-.container-blocks {
+.top-border {
     position: absolute;
     width: 100%;
     left: 0;
@@ -119,26 +120,12 @@ body {
     overflow: hidden;
 }
 
-.container-blocks .left-block, .container-blocks .right-block {
+.top-border span {
     display: block;
-    width: 10px;
+    width: 120px;
     height: 10px;
-    float: left;
     overflow: hidden;
-    background: #23272a;
-    margin-right: 10px;
-}
-
-.container-blocks .right-block {
-    float: right;
-}
-
-.left-block.main-left-block, .right-block.main-right-block {
-    width: 40px;
-}
-
-.right-block.main-right-block {
-    margin-right: 0;
+    background: #4f545c;
 }
 
 .arrow {
@@ -208,19 +195,19 @@ body {
     right: 102px;
 }
 
-.panel {
+.view {
     position: absolute;
     right: -70px;
     top: 20px;
     width: 44px;
 }
 
-.panel-left {
+.view.left {
     right: auto;
-    left: -70px;
+    left: -70px; 
 }
 
-.panel span {
+.view span {
     display: block;
     width: 20px;
     height: 20px;
@@ -229,7 +216,7 @@ body {
     float: left;
 }
 
-.panel .tranparent {
+.view .tranparent {
     width: 20px;
     height: 20px;
     overflow: hidden;
@@ -237,7 +224,7 @@ body {
     border: none;
 }
 
-.panel .space {
+.view .space {
     height: 30px;
     clear: both;
 }
@@ -323,4 +310,12 @@ span {
 
 .unselectable {
     user-select: none;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
 }
