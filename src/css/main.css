@@ -31,6 +31,37 @@ body {
     background-color: #7289da;
 }
 
+button {
+    display: block;
+    position: relative;
+    box-shadow: 0 1px 2px 0 rgb(34, 36, 38, .15), inset 0 -10px 6px 0 rgb(34, 36, 38, .35);
+    border: 1px solid rgba(34, 36, 38, .3);
+    border-radius: 50%;
+    transition: 0.1s ease-out;
+    cursor: pointer;
+}
+
+button:active {
+    box-shadow: 0 1px 2px 0 rgb(34, 36, 38, .15), inset 0 10px 6px 0 rgb(34, 36, 38, .35);
+}
+
+button:active, button:focus {
+    outline: none;
+}
+
+span {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+}
+
+h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    color: #36393e;
+}
+
 #root {
     width: 640px;
     box-shadow: inset 0 0 10px #fff;
@@ -229,12 +260,6 @@ body {
     clear: both;
 }
 
-h1 {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-}
-
 h1 span {
     margin: 0 -8px;
 }
@@ -271,26 +296,8 @@ h1 span {
     background: #f9fafb;
 }
 
-button {
-    display: block;
-    position: relative;
-    box-shadow: 0 1px 2px 0 rgb(34, 36, 38, .15), inset 0 -10px 6px 0 rgb(34, 36, 38, .35);
-    border: 1px solid rgba(34, 36, 38, .3);
-    border-radius: 50%;
-    transition: 0.1s ease-out;
-    cursor: pointer;
-}
-
-button:active {
-    box-shadow: 0 1px 2px 0 rgb(34, 36, 38, .15), inset 0 10px 6px 0 rgb(34, 36, 38, .35);
-}
-
 .clear {
     clear: both;
-}
-
-button:active, button:focus {
-    outline: none;
 }
 
 .game-screen canvas {
@@ -300,12 +307,6 @@ button:active, button:focus {
     position: absolute;
     top: -80px;
     left: -62px;
-}
-
-span {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
 }
 
 .unselectable {
