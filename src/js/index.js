@@ -1,10 +1,10 @@
-import Game from './js/game';
-import View from './js/view';
-import Controller from './js/controller';
-import { WIDTH, HEIGHT, COLUMNS, ROWS, } from './js/constants';
+import Game from './game';
+import View from './view';
+import Controller from './controller';
+import { WIDTH, HEIGHT, COLUMNS, ROWS, } from './constants';
 
 import 'reset-css';
-import './css/main.css';
+import '../css/main.css';
 
 window.addEventListener('load', () => {
     const rootEl = document.getElementById('root');

@@ -1,8 +1,10 @@
+const HIGH_SCORE = 'highScore';
+
 const GameUtils = {
     getHighScore() {
         let highScore;
         try {
-            highScore = localStorage.getItem('highScore');
+            highScore = localStorage.getItem(HIGH_SCORE);
         } catch (error) {
             console.error(error.message);
         }
@@ -14,7 +16,7 @@ const GameUtils = {
     },
 
     setHighScore(score) {
-        localStorage.setItem('highScore', score);
+        localStorage.setItem(HIGH_SCORE, score);
     }
 };
 

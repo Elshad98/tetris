@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
-    entry: './src/index.js',
+    entry: './src/js/index.js',
     output: {
         path: path.resolve(__dirname, './build'),
         filename: 'js/main.js',
@@ -98,8 +98,8 @@ const config = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: __dirname + '/public/index.html',
-            favicon: __dirname + '/public/favicon.ico',
+            template: __dirname + '/src/index.html',
+            favicon: __dirname + '/src/favicon.ico',
             inject: 'body',
             files: {
                 css: [__dirname + 'main.css'],
