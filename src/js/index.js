@@ -1,7 +1,6 @@
 import Game from './game';
 import View from './view';
 import Controller from './controller';
-import { WIDTH, HEIGHT, COLUMNS, ROWS, } from './constants';
 
 import 'reset-css';
 import '../css/main.css';
@@ -12,16 +11,8 @@ window.addEventListener('load', () => {
     const gameControls = document.querySelector('.game-controls');
 
     const game = new Game();
-    const view = new View(element, WIDTH, HEIGHT, ROWS, COLUMNS);
-    const controller = new Controller(game, view, {
-        left: document.querySelector('.left-button'),
-        drop: document.querySelector('.drop-button'),
-        down: document.querySelector('.down-button'),
-        right: document.querySelector('.right-button'),
-        pause: document.querySelector('.pause-button'),
-        reset: document.querySelector('.reset-button'),
-        rotation: document.querySelector('.rotation-button')
-    });
+    const view = new View(element);
+    const controller = new Controller(game, view);
 
     const transform = (() => {
         const trans = ['transform', 'webkitTransform', 'msTransform', 'mozTransform', 'oTransform'];
@@ -29,7 +20,7 @@ window.addEventListener('load', () => {
         return trans.filter((e) => body.style[e] !== undefined)[0];
     })();
 
-    function resize() {
+    const resize = () => {
         const width = document.documentElement.clientWidth;
         const height = document.documentElement.clientHeight;
         const ratio = height / width;

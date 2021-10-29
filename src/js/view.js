@@ -1,30 +1,28 @@
-import { COLORS } from './constants';
+import { COLORS, WIDTH, HEIGHT, COLUMNS, ROWS } from './constants';
 
 class View {
 
-    constructor(element, width, height, rows, columns) {
+    constructor(element) {
         this.element = element;
-        this.width = width;
-        this.height = height;
 
         this.canvas = document.createElement('canvas');
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
         this.context = this.canvas.getContext('2d');
+        this.canvas.width = WIDTH;
+        this.canvas.height = HEIGHT;
 
         this.playfieldBorderWidth = 4;
-        this.playfieldWidth = Math.floor(this.width * 0.64);
-        this.playfieldHeight = this.height;
+        this.playfieldWidth = Math.floor(WIDTH * 0.64);
+        this.playfieldHeight = HEIGHT;
         this.playfieldInnerWidth = this.playfieldWidth;
         this.playfieldInnerHeight = this.playfieldHeight;
 
-        this.blockWidth = Math.floor(this.playfieldInnerWidth / columns);
-        this.blockHeight = Math.floor(this.playfieldInnerHeight / rows);
+        this.blockWidth = Math.floor(this.playfieldInnerWidth / COLUMNS);
+        this.blockHeight = Math.floor(this.playfieldInnerHeight / ROWS);
 
         this.panelX = this.playfieldWidth + 10;
         this.panelY = 0;
-        this.panelWidth = Math.floor(this.width * 0.36);
-        this.panelHeight = this.height;
+        this.panelWidth = Math.floor(WIDTH * 0.36);
+        this.panelHeight = HEIGHT;
 
         this.element.appendChild(this.canvas);
     }
@@ -36,25 +34,25 @@ class View {
     }
 
     clearScreen() {
-        this.context.clearRect(0, 0, this.width, this.height);
+        this.context.clearRect(0, 0, WIDTH, HEIGHT);
     }
 
     renderStartScreen() {
-        this.renderText('white', '18px', 'center', 'middle', 'Press "R" to Start', this.width / 2, this.height / 2);
+        this.renderText('white', '18px', 'center', 'middle', 'Press "R" to Start', WIDTH / 2, HEIGHT / 2);
     }
 
     renderPauseScreen() {
         this.context.fillStyle = 'rgba(0, 0, 0, 0.75)';
-        this.context.fillRect(0, 0, this.width, this.height);
-        this.renderText('white', '18px', 'center', 'middle', 'Press "P" to Resume', this.width / 2, this.height / 2);
+        this.context.fillRect(0, 0, WIDTH, HEIGHT);
+        this.renderText('white', '18px', 'center', 'middle', 'Press "P" to Resume', WIDTH / 2, HEIGHT / 2);
     }
 
     renderEndScreen({ score }) {
         this.clearScreen();
 
-        this.renderText('white', '18px', 'center', 'middle', 'GAME OVER', (this.width / 2), (this.height / 2) - 48);
-        this.renderText('white', '18px', 'center', 'middle', `Score: ${score}`, this.width / 2, this.height / 2);
-        this.renderText('white', '18px', 'center', 'middle', 'Press "R" to Restart', this.width / 2, (this.height / 2) + 48);
+        this.renderText('white', '18px', 'center', 'middle', 'GAME OVER', WIDTH / 2, HEIGHT / 2 - 48);
+        this.renderText('white', '18px', 'center', 'middle', `Score: ${score}`, WIDTH / 2, HEIGHT / 2);
+        this.renderText('white', '18px', 'center', 'middle', 'Press "R" to Restart', WIDTH / 2, HEIGHT / 2 + 48);
     }
 
     renderText(color, size, align, baseLine, text, x, y) {
@@ -77,7 +75,6 @@ class View {
                         y * this.blockHeight,
                         this.blockWidth,
                         this.blockHeight,
-                        5,
                         COLORS[block]
                     );
                 }
@@ -125,7 +122,6 @@ class View {
                         this.panelY + 105 + (y * this.blockHeight * 0.65),
                         this.blockWidth * 0.65,
                         this.blockHeight * 0.65,
-                        5,
                         COLORS[block]
                     );
                 }
@@ -133,28 +129,22 @@ class View {
         }
     }
 
-    roundRect(x, y, width, height, radius, color) {
-        if (typeof radius === 'number') {
-            radius = { tl: radius, tr: radius, br: radius, bl: radius };
-        } else {
-            var defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
-            for (var side in defaultRadius) {
-                radius[side] = radius[side] || defaultRadius[side];
-            }
-        }
+    roundRect(x, y, width, height, color) {
+        const radius = { topLeft: 5, topRight: 5, bottomRight: 5, bottomLeft: 5 };
+
         this.context.beginPath();
         this.context.fillStyle = color;
         this.context.lineWidth = 2;
         this.context.strokeStyle = '#f9fafb';
-        this.context.moveTo(x + radius.tl, y);
-        this.context.lineTo(x + width - radius.tr, y);
-        this.context.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
-        this.context.lineTo(x + width, y + height - radius.br);
-        this.context.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
-        this.context.lineTo(x + radius.bl, y + height);
-        this.context.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
-        this.context.lineTo(x, y + radius.tl);
-        this.context.quadraticCurveTo(x, y, x + radius.tl, y);
+        this.context.moveTo(x + radius.topLeft, y);
+        this.context.lineTo(x + width - radius.topRight, y);
+        this.context.quadraticCurveTo(x + width, y, x + width, y + radius.topRight);
+        this.context.lineTo(x + width, y + height - radius.bottomRight);
+        this.context.quadraticCurveTo(x + width, y + height, x + width - radius.bottomRight, y + height);
+        this.context.lineTo(x + radius.bottomLeft, y + height);
+        this.context.quadraticCurveTo(x, y + height, x, y + height - radius.bottomLeft);
+        this.context.lineTo(x, y + radius.topLeft);
+        this.context.quadraticCurveTo(x, y, x + radius.topLeft, y);
         this.context.closePath();
         this.context.fill();
         this.context.stroke();

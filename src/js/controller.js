@@ -2,13 +2,12 @@ import { KEYS, DEFAULT_INTERVAL, MAX_UPDATE_INTERVAL, MIN_UPDATE_INTERVAL } from
 
 class Controller {
 
-    constructor(game, view, buttons) {
+    constructor(game, view) {
         this.game = game;
         this.view = view;
-        this.buttons = buttons;
+        this.interval = null;
         this.intervalId = null;
         this.isPlaying = false;
-        this.interval = null;
         this.isMouseDownEvent = false;
         this.isTouchStartEvent = false;
 
@@ -18,9 +17,9 @@ class Controller {
 
     addEventListeners() {
         window.addEventListener('blur', this.pause.bind(this));
-        document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
-        window.addEventListener('contextmenu',  (evt) => {
+        document.addEventListener('keydown', this.handleKeyDown.bind(this));
+        window.addEventListener('contextmenu', (evt) => {
             if (evt.preventDefault) {
                 evt.preventDefault();
             }
@@ -40,23 +39,23 @@ class Controller {
                 event.preventDefault();
             }
         });
-
         document.addEventListener('mousedown', (evt) => {
             if (evt.preventDefault) {
                 evt.preventDefault();
             }
         }, true);
-        this.onMouseDown(this.buttons.left, this.startMoveLeft.bind(this));
-        this.onMouseUp(this.buttons.left, this.stopMove.bind(this));
-        this.onMouseDown(this.buttons.right, this.startMoveRight.bind(this));
-        this.onMouseUp(this.buttons.right, this.stopMove.bind(this));
-        this.onMouseDown(this.buttons.pause, this.togglePlayPause.bind(this));
-        this.onMouseDown(this.buttons.reset, this.reset.bind(this));
-        this.onMouseDown(this.buttons.rotation, this.startRotation.bind(this));
-        this.onMouseUp(this.buttons.rotation, this.stopMove.bind(this));
-        this.onMouseDown(this.buttons.down, this.startMoveDown.bind(this));
-        this.onMouseUp(this.buttons.down, this.endMoveDown.bind(this));
-        this.onMouseDown(this.buttons.drop, this.startDrop.bind(this));
+
+        this.onMouseDown(document.querySelector('.left-button'), this.startMoveLeft.bind(this));
+        this.onMouseUp(document.querySelector('.left-button'), this.stopMove.bind(this));
+        this.onMouseDown(document.querySelector('.right-button'), this.startMoveRight.bind(this));
+        this.onMouseUp(document.querySelector('.right-button'), this.stopMove.bind(this));
+        this.onMouseDown(document.querySelector('.pause-button'), this.togglePlayPause.bind(this));
+        this.onMouseDown(document.querySelector('.reset-button'), this.reset.bind(this));
+        this.onMouseDown(document.querySelector('.rotation-button'), this.startRotation.bind(this));
+        this.onMouseUp(document.querySelector('.rotation-button'), this.stopMove.bind(this));
+        this.onMouseDown(document.querySelector('.down-button'), this.startMoveDown.bind(this));
+        this.onMouseUp(document.querySelector('.down-button'), this.endMoveDown.bind(this));
+        this.onMouseDown(document.querySelector('.drop-button'), this.startDrop.bind(this));
     }
 
     onMouseDown(button, callback) {
