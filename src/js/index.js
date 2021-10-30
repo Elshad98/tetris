@@ -31,7 +31,7 @@ window.addEventListener('load', () => {
             scale = height / 960;
         } else {
             scale = width / 640;
-            let filling = (height - (960 * scale)) / scale / 3;
+            const filling = (height - (960 * scale)) / scale / 3;
             gameControls.style.marginTop = `${filling + 25}px`;
             rootEl.style.paddingTop = `${Math.floor(filling) + 42}px`;
             rootEl.style.paddingBottom = `${Math.floor(filling)}px`;

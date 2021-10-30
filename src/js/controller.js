@@ -5,9 +5,9 @@ class Controller {
     constructor(game, view) {
         this.game = game;
         this.view = view;
-        this.interval = null;
         this.intervalId = null;
         this.isPlaying = false;
+        this.moveInterval = null;
         this.isMouseDownEvent = false;
         this.isTouchStartEvent = false;
 
@@ -116,11 +116,9 @@ class Controller {
     startTimer() {
         if (!this.intervalId) {
             const speed = MAX_UPDATE_INTERVAL - (this.game.getState().level * 100);
-            const ms = (speed >= MIN_UPDATE_INTERVAL) ? speed : MIN_UPDATE_INTERVAL;
+            const milliseconds = (speed >= MIN_UPDATE_INTERVAL) ? speed : MIN_UPDATE_INTERVAL;
 
-            this.intervalId = setInterval(() => {
-                this.update();
-            }, ms);
+            this.intervalId = setInterval(this.update.bind(this), milliseconds);
         }
     }
 
@@ -178,9 +176,7 @@ class Controller {
 
     startMove(callback) {
         callback();
-        this.interval = setInterval(() => {
-            callback();
-        }, DEFAULT_INTERVAL);
+        this.moveInterval = setInterval(callback, DEFAULT_INTERVAL);
     }
 
     onDown() {
@@ -210,7 +206,7 @@ class Controller {
     }
 
     stopMove() {
-        clearInterval(this.interval);
+        clearInterval(this.moveInterval);
     }
 
     togglePlayPause() {

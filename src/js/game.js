@@ -262,7 +262,7 @@ class Game {
     }
 
     clearLines() {
-        let lines = [];
+        const lines = [];
 
         for (let y = ROWS - 1; y >= 0; y--) {
             let numberOfBlocks = 0;
@@ -282,20 +282,12 @@ class Game {
             }
         }
 
-        for (let index of lines) {
+        for (const index of lines) {
             this.playfield.splice(index, 1);
-            this.playfield.unshift(this.getPlayfieldLine(COLUMNS, 0));
+            this.playfield.unshift(new Array(COLUMNS).fill(0));
         }
 
         this.updateScore(lines.length);
-    }
-
-    getPlayfieldLine(length, value) {
-        let arr = new Array(length);
-        for (let i = 0; i < arr.length; i++) {
-            arr[i] = value;
-        }
-        return arr
     }
 
     updateScore(clearLines) {
