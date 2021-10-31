@@ -67,16 +67,15 @@ const config = {
                 }]
             },
             {
-                test: /\.(jpg|png|gif)$/,
+                test: /\.(ogg|mp3|wav|mpe?g)$/i,
                 use: [{
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: 'img/',
-                        publicPath: 'img/'
-                    }
+                        outputPath: 'sounds/'
+                    },
                 }]
-            },
+            }
         ],
     },
     plugins: [

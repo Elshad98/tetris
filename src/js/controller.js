@@ -2,9 +2,10 @@ import { KEYS, DEFAULT_INTERVAL, MAX_UPDATE_INTERVAL, MIN_UPDATE_INTERVAL } from
 
 class Controller {
 
-    constructor(game, view) {
+    constructor(game, view, sound) {
         this.game = game;
         this.view = view;
+        this.sound = sound;
         this.intervalId = null;
         this.isPlaying = false;
         this.moveInterval = null;
@@ -50,6 +51,7 @@ class Controller {
         this.onMouseDown(document.querySelector('.right-button'), this.startMoveRight.bind(this));
         this.onMouseUp(document.querySelector('.right-button'), this.stopMove.bind(this));
         this.onMouseDown(document.querySelector('.pause-button'), this.togglePlayPause.bind(this));
+        this.onMouseDown(document.querySelector('.sound-button'), this.muteToggle.bind(this));
         this.onMouseDown(document.querySelector('.reset-button'), this.reset.bind(this));
         this.onMouseDown(document.querySelector('.rotation-button'), this.startRotation.bind(this));
         this.onMouseUp(document.querySelector('.rotation-button'), this.stopMove.bind(this));
@@ -110,6 +112,7 @@ class Controller {
     reset() {
         this.stopTimer();
         this.game.reset();
+        this.sound.reset();
         this.play();
     }
 
@@ -135,7 +138,7 @@ class Controller {
         if (state.isGameOver) {
             this.view.renderEndScreen(state);
         } else if (this.isPlaying) {
-            this.view.renderMainScreen(this.game.getState());
+            this.view.renderMainScreen(state);
         } else {
             this.view.renderPauseScreen();
         }
@@ -145,6 +148,7 @@ class Controller {
         if (this.isPlaying) {
             this.game.movePieceLeft();
             this.updateView();
+            this.sound.moves();
         }
     }
 
@@ -156,6 +160,7 @@ class Controller {
         if (this.isPlaying) {
             this.game.movePieceRight();
             this.updateView();
+            this.sound.moves();
         }
     }
 
@@ -167,6 +172,7 @@ class Controller {
         if (this.isPlaying) {
             this.game.rotatePiece();
             this.updateView();
+            this.sound.moves();
         }
     }
 
@@ -184,11 +190,13 @@ class Controller {
             this.stopTimer();
             this.game.movePieceDown();
             this.updateView();
+            this.sound.moves();
         }
     }
 
     startMoveDown() {
         this.startMove(this.onDown.bind(this));
+        this.sound.moves();
     }
 
     endMoveDown() {
@@ -202,6 +210,7 @@ class Controller {
         if (this.isPlaying) {
             this.game.dropDown();
             this.updateView();
+            this.sound.drop();
         }
     }
 
@@ -209,7 +218,12 @@ class Controller {
         clearInterval(this.moveInterval);
     }
 
+    muteToggle() {
+        this.sound.muteToggle();
+    }
+
     togglePlayPause() {
+        this.sound.pause();
         if (this.isPlaying) {
             this.pause();
         } else {

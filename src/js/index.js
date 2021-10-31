@@ -1,5 +1,6 @@
 import Game from './game';
 import View from './view';
+import Sound from './sound';
 import Controller from './controller';
 
 import 'reset-css';
@@ -10,14 +11,15 @@ window.addEventListener('load', () => {
     const element = document.querySelector('.game-screen');
     const gameControls = document.querySelector('.game-controls');
 
-    const game = new Game();
+    const sound = new Sound(rootEl);
+    const game = new Game(sound);
     const view = new View(element);
-    const controller = new Controller(game, view);
+    const controller = new Controller(game, view, sound);
 
     const transform = (() => {
         const trans = ['transform', 'webkitTransform', 'msTransform', 'mozTransform', 'oTransform'];
         const body = document.body;
-        return trans.filter((e) => body.style[e] !== undefined)[0];
+        return trans.filter(element => body.style[element] !== undefined)[0];
     })();
 
     const resize = () => {

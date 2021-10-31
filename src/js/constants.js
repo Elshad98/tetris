@@ -29,7 +29,7 @@ const KEYS = {
     P: 80,
     ENTER: 13,
     SPACE: 32
-}
+};
 
 const COLORS = {
     '1': '#ffc90d',
@@ -39,6 +39,15 @@ const COLORS = {
     '5': '#3f46cb',
     '6': '#a349a3',
     '7': '#01a2e8'
+};
+
+const SOUNDS = {
+    drop: 'drop',
+    clear: 'clear',
+    moves: 'moves',
+    pause: 'pause',
+    reset: 'reset',
+    finish: 'finish'
 };
 
 export {
@@ -53,5 +62,6 @@ export {
     MIN_UPDATE_INTERVAL,
     NUMBER_SHAPES,
     KEYS,
-    COLORS
+    COLORS,
+    SOUNDS
 };

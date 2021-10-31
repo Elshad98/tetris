@@ -1,9 +1,9 @@
 import { COLUMNS, ROWS, NUMBER_SHAPES, TYPES, POINTS } from './constants';
-import GameUtils from './utils/game-utils';
 
 class Game {
 
-    constructor() {
+    constructor(sound) {
+        this.sound = sound;
         this.reset();
     }
 
@@ -38,7 +38,8 @@ class Game {
             nextPiece: this.nextPiece,
             score: this.score,
             isGameOver: this.topOut,
-            highScore: this.highScore
+            highScore: this.highScore,
+            isMuted: this.sound.isMuted()
         };
     }
 
@@ -47,7 +48,7 @@ class Game {
         this.lines = 0;
         this.topOut = false;
         this.pieces = [];
-        this.highScore = GameUtils.getHighScore();
+        this.highScore = this.getHighScore();
         this.playfield = this.createPlayfield();
         this.activePiece = this.createPiece();
         this.nextPiece = this.createPiece();
@@ -55,15 +56,12 @@ class Game {
 
     createPlayfield() {
         const playfield = [];
-
         for (let y = 0; y < ROWS; y++) {
             playfield[y] = [];
-
             for (let x = 0; x < COLUMNS; x++) {
                 playfield[y][x] = 0;
             }
         }
-
         return playfield;
     }
 
@@ -192,8 +190,9 @@ class Game {
     checkCollision() {
         if (this.hasCollision()) {
             this.topOut = true;
+            this.sound.finish();
             if (this.score > this.highScore) {
-                GameUtils.setHighScore(this.score);
+                this.setHighScore(this.score);
             }
         }
     }
@@ -278,6 +277,7 @@ class Game {
             } else if (numberOfBlocks < COLUMNS) {
                 continue;
             } else if (numberOfBlocks === COLUMNS) {
+                this.sound.clear();
                 lines.unshift(y);
             }
         }
@@ -300,6 +300,19 @@ class Game {
     updatePieces() {
         this.activePiece = this.nextPiece;
         this.nextPiece = this.createPiece();
+    }
+
+    getHighScore() {
+        const highScore = localStorage.getItem('highScore');
+        if (/^\d+$/.test(highScore)) {
+            return Number(highScore);
+        } else {
+            return 0;
+        }
+    }
+
+    setHighScore(score) {
+        localStorage.setItem('highScore', score);
     }
 }
 
