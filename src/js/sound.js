@@ -1,12 +1,5 @@
 import { SOUNDS } from './constants';
 
-import '../sounds/drop.mp3';
-import '../sounds/reset.mp3';
-import '../sounds/clear.mp3';
-import '../sounds/moves.mp3';
-import '../sounds/pause.mp3';
-import '../sounds/finish.mp3';
-
 class Sound {
 
     constructor(parentNode) {

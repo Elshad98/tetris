@@ -1,10 +1,17 @@
-import Game from './game';
-import View from './view';
-import Sound from './sound';
-import Controller from './controller';
+import Game from './js/game';
+import View from './js/view';
+import Sound from './js/sound';
+import Controller from './js/controller';
+
+import './sounds/drop.mp3';
+import './sounds/reset.mp3';
+import './sounds/clear.mp3';
+import './sounds/moves.mp3';
+import './sounds/pause.mp3';
+import './sounds/finish.mp3';
 
 import 'reset-css';
-import '../css/main.css';
+import './css/main.css';
 
 window.addEventListener('load', () => {
     const rootEl = document.getElementById('root');
