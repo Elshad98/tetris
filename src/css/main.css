@@ -112,13 +112,7 @@ h1 {
 .game-pause-button {
     position: absolute;
     top: 0px;
-    right: 212px;
-}
-
-.game-sound-button {
-    position: absolute;
-    top: 0px;
-    right: 120px;
+    right: 130px;
 }
 
 .game-reset-button {
@@ -211,7 +205,7 @@ h1 {
     right: 374px;
 }
 
-.pause-button, .reset-button, .sound-button {
+.pause-button, .reset-button {
     width: 52px;
     height: 52px;
 }

@@ -51,7 +51,6 @@ class Controller {
         this.onMouseDown(document.querySelector('.right-button'), this.startMoveRight.bind(this));
         this.onMouseUp(document.querySelector('.right-button'), this.stopMove.bind(this));
         this.onMouseDown(document.querySelector('.pause-button'), this.togglePlayPause.bind(this));
-        this.onMouseDown(document.querySelector('.sound-button'), this.muteToggle.bind(this));
         this.onMouseDown(document.querySelector('.reset-button'), this.reset.bind(this));
         this.onMouseDown(document.querySelector('.rotation-button'), this.startRotation.bind(this));
         this.onMouseUp(document.querySelector('.rotation-button'), this.stopMove.bind(this));
@@ -216,10 +215,6 @@ class Controller {
 
     stopMove() {
         clearInterval(this.moveInterval);
-    }
-
-    muteToggle() {
-        this.sound.muteToggle();
     }
 
     togglePlayPause() {
