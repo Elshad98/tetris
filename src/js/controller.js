@@ -2,10 +2,9 @@ import { KEYS, DEFAULT_INTERVAL, MAX_UPDATE_INTERVAL, MIN_UPDATE_INTERVAL } from
 
 class Controller {
 
-    constructor(game, view, sound) {
+    constructor(game, view) {
         this.game = game;
         this.view = view;
-        this.sound = sound;
         this.intervalId = null;
         this.isPlaying = false;
         this.moveInterval = null;
@@ -111,7 +110,6 @@ class Controller {
     reset() {
         this.stopTimer();
         this.game.reset();
-        this.sound.reset();
         this.play();
     }
 
@@ -147,7 +145,6 @@ class Controller {
         if (this.isPlaying) {
             this.game.movePieceLeft();
             this.updateView();
-            this.sound.moves();
         }
     }
 
@@ -159,7 +156,6 @@ class Controller {
         if (this.isPlaying) {
             this.game.movePieceRight();
             this.updateView();
-            this.sound.moves();
         }
     }
 
@@ -171,7 +167,6 @@ class Controller {
         if (this.isPlaying) {
             this.game.rotatePiece();
             this.updateView();
-            this.sound.moves();
         }
     }
 
@@ -189,13 +184,11 @@ class Controller {
             this.stopTimer();
             this.game.movePieceDown();
             this.updateView();
-            this.sound.moves();
         }
     }
 
     startMoveDown() {
         this.startMove(this.onDown.bind(this));
-        this.sound.moves();
     }
 
     endMoveDown() {
@@ -209,7 +202,6 @@ class Controller {
         if (this.isPlaying) {
             this.game.dropDown();
             this.updateView();
-            this.sound.drop();
         }
     }
 
@@ -218,7 +210,6 @@ class Controller {
     }
 
     togglePlayPause() {
-        this.sound.pause();
         if (this.isPlaying) {
             this.pause();
         } else {

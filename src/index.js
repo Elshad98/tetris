@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
     const sound = new Sound(rootEl);
     const game = new Game(sound);
     const view = new View(element);
-    const controller = new Controller(game, view, sound);
+    const controller = new Controller(game, view);
 
     const transform = (() => {
         const trans = ['transform', 'webkitTransform', 'msTransform', 'mozTransform', 'oTransform'];
