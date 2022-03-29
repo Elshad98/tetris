@@ -1,6 +1,5 @@
 import Game from './js/game';
 import View from './js/view';
-import Sound from './js/sound';
 import Controller from './js/controller';
 
 import './sounds/drop.mp3';
@@ -18,10 +17,9 @@ window.addEventListener('load', () => {
     const element = document.querySelector('.game-screen');
     const gameControls = document.querySelector('.game-controls');
 
-    const sound = new Sound(rootEl);
-    const game = new Game(sound);
+    const game = new Game();
     const view = new View(element);
-    const controller = new Controller(game, view);
+    new Controller(game, view);
 
     const transform = (() => {
         const trans = ['transform', 'webkitTransform', 'msTransform', 'mozTransform', 'oTransform'];

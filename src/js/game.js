@@ -2,8 +2,7 @@ import { COLUMNS, ROWS, NUMBER_SHAPES, TYPES, POINTS } from './constants';
 
 class Game {
 
-    constructor(sound) {
-        this.sound = sound;
+    constructor() {
         this.reset();
     }
 
@@ -39,7 +38,6 @@ class Game {
             score: this.score,
             isGameOver: this.topOut,
             highScore: this.highScore,
-            isMuted: this.sound.isMuted()
         };
     }
 
@@ -190,7 +188,6 @@ class Game {
     checkCollision() {
         if (this.hasCollision()) {
             this.topOut = true;
-            this.sound.finish();
             if (this.score > this.highScore) {
                 this.setHighScore(this.score);
             }
@@ -277,7 +274,6 @@ class Game {
             } else if (numberOfBlocks < COLUMNS) {
                 continue;
             } else if (numberOfBlocks === COLUMNS) {
-                this.sound.clear();
                 lines.unshift(y);
             }
         }
