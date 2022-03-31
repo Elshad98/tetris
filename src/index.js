@@ -2,13 +2,6 @@ import Game from './js/game';
 import View from './js/view';
 import Controller from './js/controller';
 
-import './sounds/drop.mp3';
-import './sounds/reset.mp3';
-import './sounds/clear.mp3';
-import './sounds/moves.mp3';
-import './sounds/pause.mp3';
-import './sounds/finish.mp3';
-
 import 'reset-css';
 import './css/main.css';
 
