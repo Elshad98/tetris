@@ -11,14 +11,50 @@ const POINTS = {
     '4': 100
 };
 
-const TYPES = 'IJLOSTZ';
+const SHAPES = [
+    [
+        [0, 0, 0, 0],
+        [1, 1, 1, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    [
+        [0, 0, 0],
+        [2, 2, 2],
+        [0, 0, 2]
+    ],
+    [
+        [0, 0, 0],
+        [3, 3, 3],
+        [3, 0, 0]
+    ],
+    [
+        [0, 0, 0, 0],
+        [0, 4, 4, 0],
+        [0, 4, 4, 0],
+        [0, 0, 0, 0]
+    ],
+    [
+        [0, 0, 0],
+        [0, 5, 5],
+        [5, 5, 0]
+    ],
+    [
+        [0, 0, 0],
+        [6, 6, 6],
+        [0, 6, 0]
+    ],
+    [
+        [0, 0, 0],
+        [7, 7, 0],
+        [0, 7, 7]
+    ]
+];
 
 const DEFAULT_INTERVAL = 150;
 
 const MAX_UPDATE_INTERVAL = 800;
 const MIN_UPDATE_INTERVAL = 200;
-
-const NUMBER_SHAPES = 7;
 
 const KEYS = {
     RIGHT: 39,
@@ -41,27 +77,16 @@ const COLORS = {
     '7': '#01a2e8'
 };
 
-const SOUNDS = {
-    drop: 'drop',
-    clear: 'clear',
-    moves: 'moves',
-    pause: 'pause',
-    reset: 'reset',
-    finish: 'finish'
-};
-
 export {
     WIDTH,
     HEIGHT,
     COLUMNS,
     ROWS,
     POINTS,
-    TYPES,
     DEFAULT_INTERVAL,
     MAX_UPDATE_INTERVAL,
     MIN_UPDATE_INTERVAL,
-    NUMBER_SHAPES,
     KEYS,
     COLORS,
-    SOUNDS
+    SHAPES
 };

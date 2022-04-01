@@ -1,4 +1,4 @@
-import { COLUMNS, ROWS, NUMBER_SHAPES, TYPES, POINTS } from './constants';
+import { COLUMNS, ROWS, POINTS, SHAPES } from './constants';
 
 class Game {
 
@@ -45,7 +45,6 @@ class Game {
         this.score = 0;
         this.lines = 0;
         this.topOut = false;
-        this.pieces = [];
         this.highScore = this.getHighScore();
         this.playfield = this.createPlayfield();
         this.activePiece = this.createPiece();
@@ -65,73 +64,11 @@ class Game {
 
     createPiece() {
         const piece = {};
-        let currentType;
-        do {
-            const index = Math.floor(Math.random() * NUMBER_SHAPES);
-            currentType = TYPES[index];
-        } while (this.isRepeated(currentType));
-
-        if (currentType === 'I') {
-            piece.blocks = [
-                [0, 0, 0, 0],
-                [1, 1, 1, 1],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
-            ];
-        } else if (currentType === 'J') {
-            piece.blocks = [
-                [0, 0, 0],
-                [2, 2, 2],
-                [0, 0, 2]
-            ];
-        } else if (currentType === 'L') {
-            piece.blocks = [
-                [0, 0, 0],
-                [3, 3, 3],
-                [3, 0, 0]
-            ];
-        } else if (currentType === 'O') {
-            piece.blocks = [
-                [0, 0, 0, 0],
-                [0, 4, 4, 0],
-                [0, 4, 4, 0],
-                [0, 0, 0, 0]
-            ];
-        } else if (currentType === 'S') {
-            piece.blocks = [
-                [0, 0, 0],
-                [0, 5, 5],
-                [5, 5, 0]
-            ];
-        } else if (currentType === 'T') {
-            piece.blocks = [
-                [0, 0, 0],
-                [6, 6, 6],
-                [0, 6, 0]
-            ];
-        } else if (currentType === 'Z') {
-            piece.blocks = [
-                [0, 0, 0],
-                [7, 7, 0],
-                [0, 7, 7]
-            ];
-        }
-        piece.x = Math.floor((10 - piece.blocks[0].length) / 2);
+        const index = Math.floor(Math.random() * SHAPES.length);
+        piece.blocks = SHAPES[index].map((arr) => arr.slice());
+        piece.x = Math.floor((COLUMNS - piece.blocks[0].length) / 2);
         piece.y = -1;
         return piece;
-    }
-
-    isRepeated(type) {
-        let result = false;
-        if (this.pieces[0] !== type) {
-            this.pieces = [type];
-        } else {
-            this.pieces.push(type);
-        }
-        if (this.pieces.length > 2) {
-            result = true;
-        }
-        return result;
     }
 
     dropDown() {
@@ -300,11 +237,7 @@ class Game {
 
     getHighScore() {
         const highScore = localStorage.getItem('highScore');
-        if (/^\d+$/.test(highScore)) {
-            return Number(highScore);
-        } else {
-            return 0;
-        }
+        return (/^\d+$/.test(highScore)) ? Number(highScore) : 0;
     }
 
     setHighScore(score) {
